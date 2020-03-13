@@ -1,0 +1,71 @@
+* {
+    border: 0;
+    padding: 0;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    height: 100%;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+    width:  40%;
+
+    background-color: rgba(128, 128, 128, 0.075);
+}
+
+.imgContainer {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+    flex-direction: column;
+    background-image: url("https://source.unsplash.com/user/brookelark/1000x1000");
+    height: 500px;
+    width: 500px;
+    border-radius: 10px;
+}
+
+.mealDescription {
+    height: 60px;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.6);
+    padding: 10px;
+}
+
+
+.imgContainer * {
+    margin: 0;
+}
+
+.swipeButtons {
+    border-radius: 50%;
+    height: 48px;
+    width:  48px;
+    padding: 10px;
+    box-shadow: 0px 0px 13px -4px rgba(0,0,0,0.62);
+    margin: 15px 20px;
+}
+
+.swipeButtons:hover {
+    transition: box-shadow 0.1s ease;
+}
+
+#swipeLeft:hover {
+    box-shadow: 0px 0px 13px -2px rgba(121, 0, 0, 0.62);
+}
+#swipeRight:hover {
+    box-shadow: 0px 0px 13px -2px rgba(0, 121, 26, 0.62);
+}

@@ -1,0 +1,48 @@
+{
+    "network": {
+      "title": "Colsultoria de Redes",
+      "imgName": "network-taylor-vick-M5tzZtFCOfs-unsplash.jpg",
+      "url": "/network"
+    },
+    "appdev": {
+      "title": "Desenvolvimento de Aplicação",
+      "imgName": "app_dev-hal-gatewood-tZc3vjPCk-Q-unsplash.jpg",
+      "url": "/appDev"
+    },
+    "secConsult": {
+      "title": "Consultoria de Segurança",
+      "imgName": "sec_cons-campaign-creators-gMsnXqILjp4-unsplash.jpg",
+      "url": "/secConsult"
+    },
+    "dataAnalysis": {
+      "title": "Analise de Dados",
+      "imgName": "data_analysis-adeolu-eletu-unRkg2jH1j0-unsplash.jpg",
+      "url": "/dataAnalysis"
+    },
+    "webDev": {
+      "title": "Desenvolvimento Web",
+      "imgName": "dev_web-davide-baraldi-D986I3Kidkg-unsplash.jpg",
+      "url": "/webDev"
+    },
+    "general": {
+      "title": "Assistência Geral",
+      "imgName": "general-john-schnobrich-FlPc9_VocJ4-unsplash.jpg",
+      "url": "/general"
+    },
+    "pentesting": {
+      "title": "Pentesting",
+      "imgName": "hacker-network-taylor-vick-M5tzZtFCOfs-unsplash.jpg",
+      "url": "/pentesting"
+    },
+    "database": {
+      "title": "Banco de Dados",
+      "imgName": "database-christina-wocintechchat-com-glRqyWJgUeY-unsplash.jpg",
+      "url": "/database"
+    },
+    "appTesting": {
+      "title": "Teste de Aplicação",
+      "imgName": "app_testing-luis-villasmil-4V8uMZx8FYA-unsplash.jpg",
+      "url": "/appTesting"
+    }
+  }
+  

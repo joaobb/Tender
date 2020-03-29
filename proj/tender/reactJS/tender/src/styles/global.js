@@ -10,7 +10,7 @@ export default createGlobalStyle`
 
     html, body, #root, .App {
         min-height: 100%;
-        height: 100%;
+        height: 100vh;
     }
 
     button:hover {

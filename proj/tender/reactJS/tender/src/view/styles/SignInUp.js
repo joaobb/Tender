@@ -1,32 +1,22 @@
 import styled from 'styled-components';
 import colors from '../../styles/colors'
-import img from '../../assets/anne-sophie-benoit-Fan_HlAfpu0-unsplash.jpg';
 
-export const LoginContainer = styled.div`
-    height: 100%;
-
-    display: flex;
-    align-items: center;
-
-    background-image: url(${img});
-    background-repeat: no-repeat;
-    background-position: right;
-    background-color: #d0d3d8;
-    background-size: contain;
-
+export const AccessContainer = styled.div`
     user-select: none;
     font-family: 'Raleway', sans-serif; 
 
+    transition: heigth 3s ease;
+
     main {
-        width: 50%;
+        /* width: 50%; */
         height: 100%;
 
-        display: inherit;
+        display: flex;
         flex-direction: column;
         align-items: flex-end;
         justify-content: center;
         
-        color: ${colors.grayFont};
+
     }
 
     #container {
@@ -78,7 +68,6 @@ export const LoginContainer = styled.div`
 
         input {
             width: 85%;
-            margin-top: 8px;
             padding: 5px 10px; 
 
             border: none;
@@ -93,7 +82,7 @@ export const LoginContainer = styled.div`
                 font-weight: bold;
              }
         }
-        #passwordInput {
+        .passwdInput {
             width: 75%;
         }
     }
@@ -103,8 +92,9 @@ export const LoginContainer = styled.div`
         justify-content: space-around;
         align-items: center;
 
-        border-bottom: 2px solid ${colors.green};
 
+        border-bottom: 1px solid rgba(84, 1, 0,.3);        
+        margin: 8px 0;
         background-color: ${colors.gray} !important;
     }
 
@@ -119,25 +109,16 @@ export const LoginContainer = styled.div`
 
         border-radius: 50px;
         border: none;
-        background-color: #22622b;
+        background-image: linear-gradient(190deg, rgb(242, 146, 43) 0%, rgb(211, 47, 45) 100%);
 
         font-size: large;
         font-weight: bold;
         color: ${colors.green};
     }
 
-    #signUp {
-        padding: 10px 15px;
-
-        color:#22622b;
-        font-size: large;
-        font-weight: bold;
-        text-decoration: none;
-    }
-
     @media (max-width: 1000px) {
         main {
-            width: 55%
+            /* width: 55% */
         }
     }
     @media (max-width: 800px) {

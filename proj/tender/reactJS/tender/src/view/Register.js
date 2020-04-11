@@ -12,13 +12,15 @@ export default class Login extends Component {
         this.state = {
             email: "",
             password: "",
+            passwordConfirmation: "",
+
             loading: false,
-            showPassword: false,
         }
     }
 
     handleChangeInput = (element) => {
         const { name, value } = element.target;
+        console.log("Handle change ", name, "Valor -> ", value, "State: ", this.state[name])
         this.setState({ [name]: value });
     };
 
@@ -35,21 +37,30 @@ export default class Login extends Component {
     }
 
     render() {
-        let { email, password, loading } = this.state;
+        let { email, password, passwordConfirmation, loading } = this.state;
         return (
             <AccessContainer>
                 <main>
                     <div id="container">
-
                         <div id="formContainer">
-                            <h1>Bem vindo novamente!</h1>
+                            <h1>Bem vindo!</h1>
 
-                            <form id="loginForm" onSubmit={() => alert("Loging")}>
+                            <form id="registerForm" onSubmit={() => alert("Loging")}>
+
                                 <EmailInput email={email} handleChange={this.handleChangeInput} />
-                                <PasswordInput password={password} handleChange={this.handleChangeInput} />
+                                <PasswordInput
+                                    password={password}
+                                    handleChange={this.handleChangeInput}
+                                />
+                                <PasswordInput
+                                    title="Confirme sua senha"
+                                    isConfirmation={true}
+                                    password={passwordConfirmation}
+                                    handleChange={this.handleChangeInput}
+                                />
 
                                 <button id="submitBt" type="button" onClick={this.onSubmit} disabled={loading}>
-                                    {loading ? null : "ENTRAR"}
+                                    {loading ? null : "CADASTRAR"}
                                 </button>
                             </form>
                         </div>

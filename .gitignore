@@ -7,6 +7,11 @@ yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
 
+projMisc/mongoConnect.sh
+projMisc/databaseData.txt
+projMisc/recipes_82k.csv
+projMisc/old
+
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 

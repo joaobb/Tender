@@ -1,4 +1,4 @@
-## Sources that were used during the building of this project:
+## Sources that were used during the making of this project:
 
 ### Dataset
 - [Spoonacular API](https://spoonacular.com/food-api/): Great food API, but most recipes are too expensive to consider making;

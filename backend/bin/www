@@ -1,5 +1,9 @@
 #!/usr/bin/env node
 
+require('dotenv').config();
+
+console.log(`Starting server at: ${process.env.PORT}`);
+
 /**
  * Module dependencies.
  */

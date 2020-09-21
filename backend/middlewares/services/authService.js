@@ -1,3 +1,6 @@
+const { ReqError } = require('../../helpers/ReqError');
+const ErrorHandler = require('../handlers/errorHandler');
+
 const Account = require('../../models/Account');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
@@ -8,11 +11,11 @@ const authenticate = async (email, password) => {
 	try {
 		// Tries to get the account with the same entered email.
 		const foundAccount = await Account.findOne({ email });
-		if (!foundAccount) throw new Error('Incorrect email address and/or password.');
+		if (!foundAccount) throw new ReqError('Incorrect email address and/or password.', 400);
 
 		// Checks if the inserted password is the same as the one on the found account
 		const validPassword = await bcrypt.compare(password, foundAccount.passwordHash);
-		if (!validPassword) throw new Error('Incorrect email address and/or password.');
+		if (!validPassword) throw new ReqError('Incorrect email address and/or password.', 400);
 
 		const { _id, username } = foundAccount;
 
@@ -22,7 +25,9 @@ const authenticate = async (email, password) => {
 		const user = { _id, username, email };
 
 		return { user, token };
-	} catch (err) {}
+	} catch (error) {
+		ErrorHandler.handleError(error);
+	}
 };
 
 module.exports = {

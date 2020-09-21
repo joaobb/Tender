@@ -1,3 +1,5 @@
+const ErrorHandler = require('../handlers/errorHandler');
+
 const RecipeService = require('../services/recipeService.js');
 
 const handleGetRandomRecipes = async (req, res, next) => {
@@ -10,7 +12,9 @@ const handleGetRandomRecipes = async (req, res, next) => {
 		res.locals['recipes'] = response;
 
 		next();
-	} catch (err) {}
+	} catch (error) {
+		ErrorHandler.handleError(req, res, error);
+	}
 };
 
 const handleGetRecipe = async (req, res, next) => {
@@ -19,47 +23,55 @@ const handleGetRecipe = async (req, res, next) => {
 
 		const response = await RecipeService.getRecipe(recipeID);
 
-    res.locals['recipe'] = response;
+		res.locals['recipe'] = response;
 
-    next()
-	} catch (err) {}
+		next();
+	} catch (error) {
+		ErrorHandler.handleError(req, res, error);
+	}
 };
 
 const handleCreate = async (req, res, next) => {
 	try {
-    const body = req.body;
-    
-    const response = await RecipeService.createRecipe(body)
+		const body = req.body;
 
-    res.locals['recipe'] = response
+		const response = await RecipeService.createRecipe(body);
 
-    next()
-	} catch (err) {}
+		res.locals['recipe'] = response;
+
+		next();
+	} catch (error) {
+		ErrorHandler.handleError(req, res, error);
+	}
 };
 
 const handleUpdate = async (req, res, next) => {
-  try {
-    const recipeID = req.params.id
-    const body = req.body;
-    
-    const response = await RecipeService.updateRecipe(recipeID, body)
+	try {
+		const recipeID = req.params.id;
+		const body = req.body;
 
-    res.locals['recipe'] = response
+		const response = await RecipeService.updateRecipe(recipeID, body);
 
-    next()
-	} catch (err) {}
+		res.locals['recipe'] = response;
+
+		next();
+	} catch (error) {
+		ErrorHandler.handleError(req, res, error);
+	}
 };
 
 const handleDelete = async (req, res, next) => {
-  try {
-    const recipeID = req.params.id
-    
-    const response = await RecipeService.deleteRecipe(recipeID)
+	try {
+		const recipeID = req.params.id;
 
-    res.locals['recipe'] = response
+		const response = await RecipeService.deleteRecipe(recipeID);
 
-    next()
-	} catch (err) {}
+		res.locals['recipe'] = response;
+
+		next();
+	} catch (error) {
+		ErrorHandler.handleError(req, res, error);
+	}
 };
 
 module.exports = {

@@ -1,5 +1,7 @@
-const { response } = require('express');
 const jwt = require('jsonwebtoken');
+
+const { ReqError } = require('../../helpers/ReqError');
+const ErrorHandler = require('../handlers/errorHandler');
 
 const AuthService = require('../services/authService');
 const { authValidation } = require('../services/validationService');
@@ -9,14 +11,22 @@ const TOKEN_SECRET = process.env.TOKEN_SECRET;
 const handleAuthorization = (req, res, next) => {
 	try {
 		const authToken = req.header('Authorization');
-		if (!authToken) throw new Error('Access Denied');
 
-		const verified = jwt.verify(authToken, TOKEN_SECRET);
+		if (!authToken) throw new ReqError('No token was provided, please sign in again.', 401);
+
+		let verified;
+
+		try {
+			verified = jwt.verify(authToken, TOKEN_SECRET);
+		} catch (error) {
+			throw new ReqError('Your token is invalid, please login again.', 401);
+		}
+
 		req.user = verified;
 
 		next();
 	} catch (error) {
-		res.status(401).json({ message: error.message });
+		ErrorHandler.handleError(req, res, error);
 	}
 };
 
@@ -32,7 +42,7 @@ const handleLogin = async (req, res, next) => {
 
 		next();
 	} catch (error) {
-		res.status(401).json({ message: error.message });
+		ErrorHandler.handleError(req, res, error);
 	}
 };
 

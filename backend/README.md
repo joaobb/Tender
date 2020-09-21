@@ -7,6 +7,8 @@ Hello and welcome to Tender's backend.
 
 Current postman collection [here](https://www.getpostman.com/collections/58ca3cec9b7c18ad0105).
 
+Current deploy [here](https://tender-apy.herokuapp.com/api/v1).
+
 This project is using environment variables to keep some data away. So, if you want to test this API please contact me, so I can arrange those to you :)
 
 ---

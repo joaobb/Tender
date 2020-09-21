@@ -1,3 +1,5 @@
+const ErrorHandler = require('../handlers/errorHandler');
+
 const Account = require('../../models/Account');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
@@ -19,8 +21,8 @@ const createAccount = async (userData) => {
 
 		const response = await account.save();
 		return response;
-	} catch (err) {
-		throw err;
+	} catch (error) {
+		ErrorHandler.handleError(req, res, error);
 	}
 };
 const getAccount = (userToken) => {
@@ -30,8 +32,8 @@ const getAccount = (userToken) => {
 		const account = Account.findById(accountID);
 
 		return account;
-	} catch (err) {
-		throw err;
+	} catch (error) {
+		ErrorHandler.handleError(req, res, error);
 	}
 };
 

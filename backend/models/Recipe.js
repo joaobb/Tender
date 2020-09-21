@@ -1,3 +1,4 @@
+const { string } = require('joi');
 const mongoose = require('mongoose');
 
 const RecipeSchema = mongoose.Schema({
@@ -31,6 +32,7 @@ const RecipeSchema = mongoose.Schema({
 		type: Date,
 		default: Date.now,
 	},
+	author_id: String,
 	tags: [String],
 });
 

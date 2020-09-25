@@ -51,7 +51,7 @@ TOKEN_SECRET=7nLyShDwZN
 $ npm start
 ```
 
-After these steps, the api will be served at localhost:3000
+After these steps, the api will be served at http://localhost:3000
 
 ---
 

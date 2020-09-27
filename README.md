@@ -1,5 +1,5 @@
 <h1 align="center">
-    <img alt="" src="./frontend/ReactJS/src/assets/tender_logo.png" height="150px" />
+    <img alt="" src="https://github.com/joaobb/Tender/blob/master/projMisc/logo.png?raw=true" height="150px" />
     <br>Match with recepies, not with people</br>
 </h1>
 

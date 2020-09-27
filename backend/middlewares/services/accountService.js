@@ -25,19 +25,57 @@ const createAccount = async (userData) => {
 		ErrorHandler.handleError(req, res, error);
 	}
 };
+
 const getAccount = (userToken) => {
 	try {
-		const accountID = jwt.verify(userToken, TOKEN_SECRET)._id;
+		const accountID = getAccountID(userToken);
 
 		const account = Account.findById(accountID);
 
 		return account;
 	} catch (error) {
-		ErrorHandler.handleError(req, res, error);
+		throw error;
+	}
+};
+
+const likeReceipe = async (userToken, recipeID) => {
+	try {
+		const accountID = getAccountID(userToken);
+
+		await Account.findByIdAndUpdate(accountID, { $addToSet: { likedRecipes: recipeID } });
+
+		return { match: true };
+	} catch (error) {
+		throw error;
+	}
+};
+
+const passReceipe = async (userToken, recipeID) => {
+	try {
+		const accountID = getAccountID(userToken);
+
+		await Account.findByIdAndUpdate(accountID, { $addToSet: { passedRecipes: recipeID } });
+
+		return { match: false };
+	} catch (error) {
+		throw error;
+	}
+};
+
+const getAccountID = (userToken) => {
+	try {
+		const accountID = jwt.verify(userToken, TOKEN_SECRET)._id;
+
+		return accountID;
+	} catch (error) {
+		throw errro;
 	}
 };
 
 module.exports = {
+	getAccountID,
 	createAccount,
 	getAccount,
+	likeReceipe,
+	passReceipe,
 };

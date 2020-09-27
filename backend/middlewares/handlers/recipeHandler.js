@@ -2,14 +2,18 @@ const ErrorHandler = require('../handlers/errorHandler');
 
 const RecipeService = require('../services/recipeService.js');
 
-const { getAccountID } = require('../services/accountService');
+const { getAccountID, getUserRecipes } = require('../services/accountService');
 
 const handleGetRandomRecipes = async (req, res, next) => {
 	try {
 		const randomQtd = Number(req.query.qtd) || 10;
 		const fullInfo = Boolean(req.query.fullInfo === 'true');
 
-		const response = await RecipeService.getRandomRecipes(randomQtd, fullInfo);
+		const userToken = req.header('Authorization');
+
+		const accountSeenRecipes = await getUserRecipes(userToken);
+
+		const response = await RecipeService.getRandomRecipes(randomQtd, fullInfo, accountSeenRecipes);
 
 		res.locals['recipes'] = response;
 
@@ -81,7 +85,7 @@ const handleDelete = async (req, res, next) => {
 
 		next();
 	} catch (error) {
-		console.error(error)
+		console.error(error);
 
 		ErrorHandler.handleError(req, res, error);
 	}

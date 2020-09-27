@@ -3,6 +3,7 @@ const ErrorHandler = require('../handlers/errorHandler');
 const Account = require('../../models/Account');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const { ReqError } = require('../../helpers/ReqError');
 
 const TOKEN_SECRET = process.env.TOKEN_SECRET;
 
@@ -26,11 +27,11 @@ const createAccount = async (userData) => {
 	}
 };
 
-const getAccount = (userToken) => {
+const getAccount = async (userToken) => {
 	try {
-		const accountID = getAccountID(userToken);
+		const accountID = await getAccountID(userToken);
 
-		const account = Account.findById(accountID);
+		const account = await Account.findById(accountID);
 
 		return account;
 	} catch (error) {
@@ -38,9 +39,27 @@ const getAccount = (userToken) => {
 	}
 };
 
-const likeReceipe = async (userToken, recipeID) => {
+const getUserRecipes = async (userToken) => {
 	try {
-		const accountID = getAccountID(userToken);
+		const accountID = await getAccountID(userToken);
+
+		const accountSeenRecipesObj = await Account.findById(accountID, {
+			_id: 0,
+			likedRecipes: 1,
+			passedRecipes: 1,
+		});
+
+		const accountSeenRecipes = [...accountSeenRecipesObj.likedRecipes, ...accountSeenRecipesObj.passedRecipes];
+
+		return accountSeenRecipes;
+	} catch (error) {
+		throw error;
+	}
+};
+
+const likeRecipe = async (userToken, recipeID) => {
+	try {
+		const accountID = await getAccountID(userToken);
 
 		await Account.findByIdAndUpdate(accountID, { $addToSet: { likedRecipes: recipeID } });
 
@@ -50,9 +69,9 @@ const likeReceipe = async (userToken, recipeID) => {
 	}
 };
 
-const passReceipe = async (userToken, recipeID) => {
+const passRecipe = async (userToken, recipeID) => {
 	try {
-		const accountID = getAccountID(userToken);
+		const accountID = await getAccountID(userToken);
 
 		await Account.findByIdAndUpdate(accountID, { $addToSet: { passedRecipes: recipeID } });
 
@@ -64,11 +83,14 @@ const passReceipe = async (userToken, recipeID) => {
 
 const getAccountID = (userToken) => {
 	try {
+		if (!userToken || typeof userToken !== 'string') {
+			throw new ReqError('A strange error occured, please login and try again.', 401);
+		}
 		const accountID = jwt.verify(userToken, TOKEN_SECRET)._id;
 
 		return accountID;
 	} catch (error) {
-		throw errro;
+		throw error;
 	}
 };
 
@@ -76,6 +98,7 @@ module.exports = {
 	getAccountID,
 	createAccount,
 	getAccount,
-	likeReceipe,
-	passReceipe,
+	getUserRecipes,
+	likeRecipe,
+	passRecipe,
 };

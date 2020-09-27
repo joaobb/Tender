@@ -10,7 +10,7 @@ const handleLike = async (req, res, next) => {
 
 		const userToken = req.header('Authorization');
 
-		const response = await AccountService.likeReceipe(userToken, recipeID);
+		const response = await AccountService.likeRecipe(userToken, recipeID);
 		res.locals['swipe'] = response;
 
 		next();
@@ -25,7 +25,7 @@ const handlePass = async (req, res, next) => {
 
 		const userToken = req.header('Authorization');
 
-		const response = await AccountService.passReceipe(userToken, recipeID);
+		const response = await AccountService.passRecipe(userToken, recipeID);
 		res.locals['swipe'] = response;
 
 		next();

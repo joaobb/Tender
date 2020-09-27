@@ -1,9 +1,13 @@
 const { ReqError } = require('../../helpers/ReqError');
 const Recipe = require('../../models/Recipe');
 
-const getRandomRecipes = async (randomQtd, fullInfo) => {
+const getRandomRecipes = async (randomQtd, fullInfo, accountSeenRecipes) => {
 	try {
-		const randomRecipes = await Recipe.aggregate([{ $sample: { size: randomQtd } }]);
+		const randomRecipes = await Recipe.aggregate([
+			{ $match: { _id: { $nin: accountSeenRecipes } } },
+			{ $sample: { size: randomQtd } },
+			{ $project: { cooking_method: 0, author_id: 0, creation_date: 0 } },
+		]);
 		return randomRecipes;
 	} catch (err) {
 		throw err;

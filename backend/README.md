@@ -7,6 +7,8 @@ Hello and welcome to Tender's backend.
 
 Current postman collection [here](https://www.getpostman.com/collections/58ca3cec9b7c18ad0105).
 
+[Postman documentation.](https://documenter.getpostman.com/view/9283323/TVKHVFab)
+
 Current deploy [here](https://tender-apy.herokuapp.com/api/v1).
 
 ---

@@ -16,16 +16,18 @@ const Account = mongoose.Schema({
 		required: true,
 		min: 6,
 	},
-	recipes: [
-		{
-			_id: String,
-			title: String,
-		},
-	],
+	likedRecipes: {
+		type: [mongoose.Schema.Types.ObjectId],
+		default: [],
+	},
+	passedRecipes: {
+		type: [mongoose.Schema.Types.ObjectId],
+		default: [],
+	},
 	creation_date: {
 		type: Date,
 		default: Date.now,
 	},
 });
 
-module.exports = mongoose.model('accountTest', Account);
+module.exports = mongoose.model('accounts', Account);

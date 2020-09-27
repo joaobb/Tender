@@ -3,8 +3,9 @@ const getRandomRecipes = async ({ res }) => {
 		const recipes = res.locals.recipes;
 
 		res.json(recipes);
-	} catch (err) {
-		res.json({ message: err.message });
+	} catch (error) {
+		console.error(error);
+		res.json({ message: error.message });
 	}
 };
 const getRecipe = async ({ res }) => {
@@ -12,8 +13,9 @@ const getRecipe = async ({ res }) => {
 		const recipe = res.locals.recipe;
 
 		res.json(recipe);
-	} catch (err) {
-		res.json({ message: err.message });
+	} catch (error) {
+		console.error(error);
+		res.json({ message: error.message });
 	}
 };
 const createRecipe = async ({ res }) => {
@@ -21,8 +23,9 @@ const createRecipe = async ({ res }) => {
 		const recipe = res.locals.recipe;
 
 		res.json(recipe);
-	} catch (err) {
-		res.json({ message: err.message });
+	} catch (error) {
+		console.error(error);
+		res.json({ message: error.message });
 	}
 };
 const updateRecipe = async ({ res }) => {
@@ -30,8 +33,9 @@ const updateRecipe = async ({ res }) => {
 		const recipe = res.locals.recipe;
 
 		res.json(recipe);
-	} catch (err) {
-		res.json({ message: err.message });
+	} catch (error) {
+		console.error(error);
+		res.json({ message: error.message });
 	}
 };
 
@@ -40,8 +44,9 @@ const deleteRecipe = async ({ res }) => {
 		const recipe = res.locals.recipe;
 
 		res.json(recipe);
-	} catch (err) {
-		res.json({ message: err.message });
+	} catch (error) {
+		console.error(error);
+		res.json({ message: error.message });
 	}
 };
 

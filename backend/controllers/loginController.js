@@ -4,7 +4,8 @@ const login = async ({ res }) => {
 
 		res.status(200).json(account);
 	} catch (error) {
-		res.json({ message: error });
+		console.error(error);
+		res.json({ message: error.message });
 	}
 };
 

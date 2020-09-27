@@ -37,7 +37,7 @@ const handleLogin = async (req, res, next) => {
 
 		const { email, password } = req.body;
 
-		const response = await AuthService.authenticate(email, password);
+		const response = await AuthService.authenticate(req, res, { email, password });
 		res.locals['account'] = response;
 
 		next();

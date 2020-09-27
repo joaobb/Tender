@@ -1,3 +1,4 @@
+const { ReqError } = require('../../helpers/ReqError');
 const Recipe = require('../../models/Recipe');
 
 const getRandomRecipes = async (randomQtd, fullInfo) => {
@@ -18,9 +19,9 @@ const getRecipe = async (recipeID) => {
 	}
 };
 
-const createRecipe = async (body) => {
+const createRecipe = async (body, accountID) => {
 	try {
-		const recipe = new Recipe({ ...body });
+		const recipe = new Recipe({ ...body, author_id: accountID });
 
 		const savedRecipe = await recipe.save();
 		return savedRecipe;
@@ -29,22 +30,35 @@ const createRecipe = async (body) => {
 	}
 };
 
-const updateRecipe = async (recipeID, body) => {
+const updateRecipe = async (recipeID, body, accountID) => {
 	try {
-		const patchedRecipe = new Recipe({ ...body });
-		const updatedRecipe = await Recipe.findByIdAndUpdate(recipeID, patchedRecipe);
+		let query = { _id: recipeID, author_id: accountID };
+		const recipe = await Recipe.findOneAndUpdate(query, { ...body });
 
-		return updatedRecipe;
+		if (!recipe)
+			throw new ReqError(
+				"Either the selected recipe doesn't exist or you don't have the authorization to edit it.",
+				400
+			);
+
+		return recipe;
 	} catch (err) {
 		throw err;
 	}
 };
 
-const deleteRecipe = async (recipeID) => {
+const deleteRecipe = async (recipeID, accountID) => {
 	try {
-		const deletedRecipe = await Recipe.findByIdAndRemove(recipeID);
+		const query = { _id: recipeID, author_id: accountID };
+		const recipe = await Recipe.findOneAndRemove(query);
 
-		return deletedRecipe;
+		if (!recipe)
+			throw new ReqError(
+				"Either the selected recipe doesn't exist or you don't have the authorization to delete it.",
+				400
+			);
+
+		return recipe;
 	} catch (err) {
 		throw err;
 	}

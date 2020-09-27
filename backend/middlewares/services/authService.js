@@ -7,7 +7,7 @@ const jwt = require('jsonwebtoken');
 
 const TOKEN_SECRET = process.env.TOKEN_SECRET;
 
-const authenticate = async (email, password) => {
+const authenticate = async (req, res, { email, password }) => {
 	try {
 		// Tries to get the account with the same entered email.
 		const foundAccount = await Account.findOne({ email });
@@ -26,7 +26,7 @@ const authenticate = async (email, password) => {
 
 		return { user, token };
 	} catch (error) {
-		ErrorHandler.handleError(error);
+		ErrorHandler.handleError(req, res, error);
 	}
 };
 

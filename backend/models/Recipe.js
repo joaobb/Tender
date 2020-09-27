@@ -32,7 +32,7 @@ const RecipeSchema = mongoose.Schema({
 		type: Date,
 		default: Date.now,
 	},
-	author_id: String,
+	author_id: mongoose.Schema.Types.ObjectId,
 	tags: [String],
 });
 

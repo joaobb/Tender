@@ -9,7 +9,7 @@ Current postman collection [here](https://www.getpostman.com/collections/58ca3ce
 
 [Postman documentation.](https://documenter.getpostman.com/view/9283323/TVKHVFab)
 
-Current deploy [here](https://tender-apy.herokuapp.com/api/v1).
+Currently deployed at http://tender-api.joaobb.xyz/api/v1
 
 ---
 

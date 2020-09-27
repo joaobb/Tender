@@ -1,6 +1,6 @@
 <h1 align="center">
     <img alt="" src="https://github.com/joaobb/Tender/blob/master/projMisc/logo.png?raw=true" height="150px" />
-    <br>Match with recepies, not with people</br>
+    <br>Match with recipes, not with people</br>
 </h1>
 
 ### Do you love cooking but don't know what to do? Search no more, dear fella. 

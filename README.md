@@ -20,10 +20,11 @@ Once you and your meal have “matched”, its recipe will be visible on your me
 
 
 
-### Deploy
+### Deploys 
 
-Our team is still fighting in the battle to deploy this awesome application. 
-But we got some loot on the last clash :feelsgood:, like [this juicy link for our api](https://tender-apy.herokuapp.com/api/v1).
+Frontend: http://tender.joaobb.xyz/
+
+Backend: http://tender-api.joaobb.xyz/
 
 ---
 

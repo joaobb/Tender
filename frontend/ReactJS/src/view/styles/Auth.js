@@ -5,9 +5,6 @@ export const Container = styled.main`
 	user-select: none;
 	font-family: 'Raleway', sans-serif;
 
-	transition: heigth 3s ease;
-
-	/* width: 50%; */
 	height: 100%;
 
 	display: flex;
@@ -15,33 +12,18 @@ export const Container = styled.main`
 	align-items: flex-end;
 	justify-content: center;
 
-	#container {
-	}
-
-	#tenderLogo {
-		width: 200px;
-	}
-
-	#loginForm {
-		width: fit-content;
-
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: space-evenly;
-	}
-
-	#showPassword {
-		display: none;
-	}
+	transition: heigth 3s ease;
 
 	@media (max-width: 1000px) {
 		main {
 			/* width: 55% */
 		}
 	}
+
 	@media (max-width: 800px) {
 		background-image: none;
+		justify-content: center;
+
 		main {
 			width: 100%;
 			align-items: center;
@@ -72,16 +54,23 @@ export const SubmitButton = styled.button`
 	color: white;
 
 	filter: ${({ isLoading }) => (isLoading ? 'opacity(0.5) !important' : 'none')};
+
+	transition: all 300ms ease;
+
+	:hover {
+		transition-duration: 200ms;
+		box-shadow: 0 0 10px rgb(33 33 33 / 0.5);
+		filter: brightness(1.05);
+	}
 `;
 
 export const FormContainer = styled.div`
-	width: fit-content;
-
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: space-evenly;
 
+	width: fit-content;
 	border-radius: 30px;
 	padding: 20px 20px 40px;
 

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
-import Container, { AccessForm } from './styles/Access';
+import Container, { AccessForm, TenderLogo } from './styles/Access';
 import Logo from '../assets/tender_logo.png';
 
 import Login from './SignIn';
@@ -18,7 +18,7 @@ const Access = () => {
 		<Container isSignIn={isSignIn}>
 			<Router>
 				<AccessForm>
-					<img id="tenderLogo" alt="Tender" src={Logo} />
+					<TenderLogo alt="Tender" src={Logo} />
 
 					<div>
 						<Route exact path="/" render={(props) => <Login {...props} />} />

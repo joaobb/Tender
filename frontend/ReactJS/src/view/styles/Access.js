@@ -22,10 +22,6 @@ const Container = styled.div`
 
 	color: ${colors.grayFont};
 
-	#tenderLogo {
-		width: 200px;
-	}
-
 	.accessTypes {
 		padding: 15px;
 
@@ -43,6 +39,7 @@ const Container = styled.div`
 
 	@media (max-width: 800px) {
 		background-image: none;
+		justify-content: center;
 	}
 `;
 
@@ -51,6 +48,10 @@ export const AccessForm = styled.div`
 	flex-direction: column;
 	align-items: center;
 	width: 70vw;
+`;
+
+export const TenderLogo = styled.img`
+	width: 200px;
 `;
 
 export default Container;

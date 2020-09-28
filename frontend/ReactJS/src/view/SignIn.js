@@ -48,7 +48,7 @@ const Login = () => {
 			localStorage.setItem('@Tender:token', token);
 			localStorage.setItem('@Tender:user', JSON.stringify(user));
 
-			await Notificate(`Welcome again, ${user.username}`, 'success');
+			await Notificate(`Welcome again, ${user.username}.`, 'success');
 
 			window.location.reload();
 		} catch (err) {

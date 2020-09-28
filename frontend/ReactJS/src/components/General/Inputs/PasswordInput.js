@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye, faEyeSlash, faLock } from '@fortawesome/free-solid-svg-icons';
+import { FaLock } from 'react-icons/fa';
+import { BsEyeFill, BsEyeSlashFill } from 'react-icons/bs';
 
-import { Label, PasswordInputCamp, InputContainer } from './styles';
+import { Label, PasswordInputCamp, InputContainer, PasswordVisibility } from './styles';
 
 const PasswordInput = ({ password, handleChange, title, isConfirmation = false }) => {
 	const [showPassword, setShowPassword] = useState(false);
@@ -14,7 +14,7 @@ const PasswordInput = ({ password, handleChange, title, isConfirmation = false }
 		<Label>
 			{title ? title : 'Password'}
 			<InputContainer>
-				<FontAwesomeIcon icon={faLock} />
+				<FaLock />
 				<PasswordInputCamp
 					name={`password${confirmation}`}
 					type={showPassword ? 'text' : 'password'}
@@ -23,14 +23,10 @@ const PasswordInput = ({ password, handleChange, title, isConfirmation = false }
 					required
 				/>
 
-				<label>
-					{showPassword ? (
-						<FontAwesomeIcon icon={faEyeSlash} title="Hide password" />
-					) : (
-						<FontAwesomeIcon icon={faEye} title="Show password" />
-					)}
-					<input id={'showPassword'} type="checkbox" onChange={(_) => setShowPassword(!showPassword)} />
-				</label>
+				<PasswordVisibility>
+					{showPassword ? <BsEyeSlashFill title="Hide password" /> : <BsEyeFill title="Show password" />}
+					<input type="checkbox" onChange={() => setShowPassword(!showPassword)} />
+				</PasswordVisibility>
 			</InputContainer>
 		</Label>
 	);

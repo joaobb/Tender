@@ -24,6 +24,11 @@ export const InputContainer = styled.div`
 	border-bottom: 1px solid rgba(84, 1, 0, 0.3);
 	margin: 8px 0;
 	background-color: white;
+
+	&.touched{
+		border-radius: 5px 5px 0 0;
+		background-color: rgb(255 0 0 / 10%);
+	}
 `;
 
 export const Input = styled.input`
@@ -36,7 +41,7 @@ export const Input = styled.input`
 	background-color: transparent;
 
 	font-size: large;
-	color: ${colors};
+	color: ${colors.grayFont};
 
 	&[type='password'] {
 		font-weight: bold;
@@ -45,4 +50,12 @@ export const Input = styled.input`
 
 export const PasswordInputCamp = styled(Input)`
 	width: 75%;
+`;
+
+export const PasswordVisibility = styled.label`
+	cursor: pointer;
+
+	input {
+		display: none;
+	}
 `;

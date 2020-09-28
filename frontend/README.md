@@ -5,6 +5,8 @@
 
 Hello and welcome to Tender's frontend.
 
+Currently deployed at http://tender.joaobb.xyz/
+
 ---
 
 ## How-to run the project locally

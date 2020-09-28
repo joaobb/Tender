@@ -1,6 +1,6 @@
 <h1 align="center">
     <img alt="" src="https://github.com/joaobb/Tender/blob/master/projMisc/logo.png?raw=true" height="150px" />
-    <br>Match with recepies, not with people</br>
+    <br>Match with recipes, not with people</br>
 </h1>
 
 ### Do you love cooking but don't know what to do? Search no more, dear fella. 
@@ -20,10 +20,11 @@ Once you and your meal have “matched”, its recipe will be visible on your me
 
 
 
-### Deploy
+### Deploys 
 
-Our team is still fighting in the battle to deploy this awesome application. 
-But we got some loot on the last clash :feelsgood:, like [this juicy link for our api](https://tender-apy.herokuapp.com/api/v1).
+Frontend: https://tender.joaobb.xyz/
+
+Backend: https://tender-api.joaobb.xyz/api/v1
 
 ---
 

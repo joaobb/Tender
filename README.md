@@ -24,7 +24,7 @@ Once you and your meal have “matched”, its recipe will be visible on your me
 
 Frontend: https://tender.joaobb.xyz/
 
-Backend: https://tender-api.joaobb.xyz/
+Backend: https://tender-api.joaobb.xyz/api/v1
 
 ---
 

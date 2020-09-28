@@ -24,11 +24,6 @@ export const InputContainer = styled.div`
 	border-bottom: 1px solid rgba(84, 1, 0, 0.3);
 	margin: 8px 0;
 	background-color: white;
-
-	&.touched{
-		border-radius: 5px 5px 0 0;
-		background-color: rgb(255 0 0 / 10%);
-	}
 `;
 
 export const Input = styled.input`

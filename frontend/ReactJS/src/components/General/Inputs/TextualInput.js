@@ -1,7 +1,6 @@
 import React from 'react';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser } from '@fortawesome/free-solid-svg-icons';
+import { FaUser } from 'react-icons/fa';
 
 import { Label, Input, InputContainer } from './styles';
 
@@ -10,7 +9,7 @@ const TextualInput = ({ value, name, onChange, label, required = false }) => {
 		<Label>
 			{label}
 			<InputContainer>
-				<FontAwesomeIcon icon={faUser} />
+				<FaUser />
 				<Input name={name} value={value} onChange={onChange} required={required} />
 			</InputContainer>
 		</Label>

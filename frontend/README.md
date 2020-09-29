@@ -15,7 +15,7 @@ Currently deployed at http://tender.joaobb.xyz/
 
 ```
 $ git clone https://github.com/joaobb/Tender.git
-$ cd Tender/frontend/
+$ cd Tender/frontend/ReactJS
 ```
 
 ### Install the dependencies

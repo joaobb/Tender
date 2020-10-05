@@ -5,21 +5,21 @@ import { BsEyeFill, BsEyeSlashFill } from 'react-icons/bs';
 
 import { Label, PasswordInputCamp, InputContainer, PasswordVisibility } from './styles';
 
-const PasswordInput = ({ password, handleChange, title, isConfirmation = false }) => {
+const PasswordInput = ({ label = 'Password', value, onChange, title, isConfirmation = false }) => {
 	const [showPassword, setShowPassword] = useState(false);
 
 	const confirmation = isConfirmation ? 'Confirmation' : '';
 
 	return (
 		<Label>
-			{title ? title : 'Password'}
+			{label}
 			<InputContainer>
 				<FaLock />
 				<PasswordInputCamp
 					name={`password${confirmation}`}
 					type={showPassword ? 'text' : 'password'}
-					value={password}
-					onChange={handleChange}
+					value={value}
+					onChange={onChange}
 					required
 				/>
 

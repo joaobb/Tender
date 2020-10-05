@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 
 import { Container, FormContainer, ContentContainer, SubmitButton } from './styles/Auth';
-
+import { FaAt, FaUser } from 'react-icons/fa';
 import WarnError from '../utils/Errors/warnError';
 
-import { EmailInput, PasswordInput, TextualInput } from '../components/General/Inputs';
+import { PasswordInput, TextualInput } from '../components/General/Inputs';
 
 import api from '../services/api';
 import Notificate from '../utils/Notification';
@@ -24,8 +24,8 @@ const Register = () => {
 
 	const history = useHistory();
 
-	const handleInput = (element) => {
-		const { name, value } = element.target;
+	const handleInput = (event) => {
+		const { name, value } = event.target;
 
 		setData({ ...data, [name]: value });
 	};
@@ -72,14 +72,31 @@ const Register = () => {
 					<h1>Welcome!</h1>
 
 					<form onSubmit={onSubmit}>
-						<TextualInput label="Username" name="username" value={data.username} onChange={handleInput} required />
-						<EmailInput email={data.email} handleChange={handleInput} />
-						<PasswordInput password={data.password} handleChange={handleInput} />
+						<TextualInput
+							label="Username"
+							name="username"
+							icon={<FaUser />}
+							value={data.username}
+							onChange={handleInput}
+							required
+						/>
+						<TextualInput
+							label="Email"
+							name="email"
+							type="email"
+							icon={<FaAt />}
+							value={data.email}
+							onChange={handleInput}
+							required
+						/>
+						<PasswordInput value={data.password} onChange={handleInput} />
 						<PasswordInput
+							label="Password confirmation"
 							title="Confirm your password"
 							isConfirmation={true}
-							password={data.passwordConfirmation}
-							handleChange={handleInput}
+							value={data.passwordConfirmation}
+							onChange={handleInput}
+							required
 						/>
 
 						<SubmitButton type="submit" isLoading={isLoading} disabled={isLoading}>

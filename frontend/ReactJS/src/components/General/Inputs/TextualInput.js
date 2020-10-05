@@ -1,16 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-import { FaUser } from 'react-icons/fa';
+import { Label, InputContainer, Input } from './styles';
 
-import { Label, Input, InputContainer } from './styles';
+const TextualInput = ({ name, type = 'text', label = '', icon, invalidity, value, onChange }) => {
+	const [touched, setTouched] = useState(false);
 
-const TextualInput = ({ value, name, onChange, label, required = false }) => {
+	const handleChange = (event) => {
+		onChange(event);
+	};
+
+	const onBlur = () => {
+		if (!touched) setTouched(true);
+	};
+
 	return (
 		<Label>
 			{label}
-			<InputContainer>
-				<FaUser />
-				<Input name={name} value={value} onChange={onChange} required={required} />
+			<InputContainer className={touched ? 'touched' : ''} title={invalidity}>
+				{icon}
+				<Input name={name} type={type} value={value} onChange={handleChange} onBlur={onBlur} required />
 			</InputContainer>
 		</Label>
 	);

@@ -12,4 +12,6 @@ export default {
 	darkGreen: '#1c240c',
 
 	grayFont: '#424242',
+
+	grayBackground: '#d0d3d8',
 };

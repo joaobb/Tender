@@ -4,7 +4,7 @@ import { Container, ContentContainer, FormContainer, SubmitButton } from './styl
 
 import WarnError from '../utils/Errors/warnError';
 
-import { EmailInput, PasswordInput } from '../components/General/Inputs';
+import { TextualInput, PasswordInput } from '../components/General/Inputs';
 import api from '../services/api';
 
 import Notificate from '../utils/Notification';
@@ -69,8 +69,8 @@ const Login = () => {
 					<h1>Welcome again!</h1>
 
 					<form onSubmit={onSubmit}>
-						<EmailInput email={data.email} handleChange={handleInput} />
-						<PasswordInput password={data.password} handleChange={handleInput} />
+						<TextualInput type="email" name="email" label="Email" value={data.email} onChange={handleInput} />
+						<PasswordInput value={data.password} onChange={handleInput} />
 
 						<SubmitButton type="submit" isLoading={isLoading} disabled={isLoading}>
 							SIGN IN

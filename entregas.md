@@ -19,4 +19,4 @@
 
 ### Entrega #5:
 #### Um subcomponente com...
-- Estado sendo definido por um GET: [entrega](https://github.com/joaobb/Tender/blob/master/frontend/ReactJS/src/view/Recipes/RecipeForm.js)
+- Estado sendo definido por um GET: [entrega](https://github.com/joaobb/Tender/blob/master/frontend/ReactJS/src/view/Recipes/RecipeForm.js#L42)

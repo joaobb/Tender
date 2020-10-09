@@ -68,10 +68,38 @@ const deleteRecipe = async (recipeID, accountID) => {
 	}
 };
 
+const getCuisines = async () => {
+	try {
+		let cuisines = await Recipe.aggregate([
+			{
+				$unwind: {
+					path: '$cuisine',
+					preserveNullAndEmptyArrays: true,
+				},
+			},
+			{
+				$group: {
+					_id: null,
+					uniqueCuisines: {
+						$addToSet: '$cuisine',
+					},
+				},
+			},
+		]);
+
+		cuisines = cuisines[0].uniqueCuisines.map((cuisine) => cuisine.replace(/'/g, ''));
+
+		return cuisines;
+	} catch (err) {
+		throw err;
+	}
+};
+
 module.exports = {
 	getRandomRecipes,
 	getRecipe,
 	createRecipe,
 	updateRecipe,
 	deleteRecipe,
+	getCuisines,
 };

@@ -7,6 +7,7 @@ const AuthHandler = require('../../middlewares/handlers/authHandler');
 const router = express.Router();
 
 router.get('/', AuthHandler.handleAuthorization, Handler.handleGetRandomRecipes, Controller.getRandomRecipes);
+router.get('/cuisines', AuthHandler.handleAuthorization, Handler.handleGetCuisines, Controller.getCuisines);
 router.get('/:id', AuthHandler.handleAuthorization, Handler.handleGetRecipe, Controller.getRecipe);
 router.post('/', AuthHandler.handleAuthorization, Handler.handleCreate, Controller.createRecipe);
 router.put('/:id?', AuthHandler.handleAuthorization, Handler.handleUpdate, Controller.updateRecipe);

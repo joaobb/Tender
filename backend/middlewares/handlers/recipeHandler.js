@@ -91,10 +91,25 @@ const handleDelete = async (req, res, next) => {
 	}
 };
 
+const handleGetCuisines = async (req, res, next) => {
+	try {
+		const response = await RecipeService.getCuisines();
+
+		res.locals['cuisines'] = response;
+
+		next();
+	} catch (error) {
+		console.error(error);
+
+		ErrorHandler.handleError(req, res, error);
+	}
+};
+
 module.exports = {
 	handleGetRandomRecipes,
 	handleGetRecipe,
 	handleCreate,
 	handleUpdate,
 	handleDelete,
+	handleGetCuisines,
 };

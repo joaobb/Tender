@@ -50,10 +50,22 @@ const deleteRecipe = async ({ res }) => {
 	}
 };
 
+const getCuisines = async ({ res }) => {
+	try {
+		const cuisines = res.locals.cuisines;
+
+		res.json(cuisines);
+	} catch (error) {
+		console.error(error);
+		res.json({ message: error.message });
+	}
+};
+
 module.exports = {
 	getRandomRecipes,
 	getRecipe,
 	createRecipe,
 	updateRecipe,
 	deleteRecipe,
+	getCuisines,
 };

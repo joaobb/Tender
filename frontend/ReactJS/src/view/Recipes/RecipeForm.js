@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 
 import { CgCloseO } from 'react-icons/cg';
+import WarnError from '../../utils/Errors/warnError';
 
 import api from '../../services/api';
 import Notificate from '../../utils/Notification';
@@ -22,7 +23,9 @@ import {
 
 import { SubmitButton } from '../styles/Auth';
 
-const NewRecipe = () => {
+const NewRecipe = ({ match }) => {
+	const { recipeID } = match.params;
+
 	const [image, setImage] = useState(
 		'https://images.unsplash.com/photo-1476718406336-bb5a9690ee2a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1234&q=80'
 	);
@@ -36,6 +39,25 @@ const NewRecipe = () => {
 	const [possibleCuisines, setPossibleCuisines] = useState([]);
 
 	useEffect(() => {
+		const fetchRecipe = async () => {
+			try {
+				const response = await api.get(`/recipes/${recipeID}`);
+				const { data: recipe } = response;
+				if (!recipe) throw new WarnError("Sorry, we didn't find this recipe. Please try again later.");
+				setTitle(recipe.name);
+				setCuisine(recipe.cuisine[0]);
+				setCookingMethod(recipe.cooking_method);
+				setIngredients(recipe.ingredients);
+				setImage(recipe.image);
+				setPrepTime(recipe.prep_time);
+				setServes(recipe.serves);
+			} catch (err) {
+				const error = err.response ? err.response.data.message : err.message;
+				if (err instanceof WarnError) Notificate(err.message, 'warn');
+				else Notificate(`An error occured during fetching your recipe: ${error}`, 'error');
+			}
+		};
+
 		const getPossibleCuisines = async () => {
 			const response = await api.get('/recipes/cuisines');
 
@@ -43,7 +65,9 @@ const NewRecipe = () => {
 			setPossibleCuisines(data);
 		};
 
+		if (recipeID) fetchRecipe();
 		getPossibleCuisines();
+
 		return () => {
 			setPossibleCuisines([]);
 		};
@@ -102,8 +126,11 @@ const NewRecipe = () => {
 		};
 
 		try {
-			const response = await api.post('/recipes', body);
-			console.log('response', response);
+			let response;
+
+			if (recipeID) response = await api.put(`/recipes/${recipeID}`, body);
+			else response = await api.post('/recipes', body);
+
 			Notificate('Yay, your recipe was created!', 'success');
 		} catch (err) {
 			const error = err.response ? err.response.data.message : err.message;

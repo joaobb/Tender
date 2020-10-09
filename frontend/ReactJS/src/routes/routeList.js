@@ -1,6 +1,6 @@
 import Access from '../view/Access';
 import SwipeArea from '../view/SwipeArea';
-import NewRecipe from '../view/Recipes/NewRecipe';
+import RecipeForm from '../view/Recipes/RecipeForm';
 
 export const privateRouteList = [
 	{
@@ -11,9 +11,15 @@ export const privateRouteList = [
 	},
 	{
 		path: '/recipes/new',
-		component: NewRecipe,
+		component: RecipeForm,
 		exact: true,
 		title: 'New Recipe',
+	},
+	{
+		path: '/recipes/:recipeID/edit',
+		component: RecipeForm,
+		exact: true,
+		title: 'Edit Recipe',
 	},
 ];
 

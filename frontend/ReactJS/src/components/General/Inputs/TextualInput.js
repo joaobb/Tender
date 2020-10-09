@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
-import { Label, InputContainer, Input } from './styles';
+import { Label, Input } from './styles';
 
-const TextualInput = ({ name, type = 'text', label = '', icon, invalidity, value, onChange }) => {
+const TextualInput = ({ name, type = 'text', label = '', invalidity, autocomplete = '', value, onChange }) => {
 	const [touched, setTouched] = useState(false);
 
 	const handleChange = (event) => {
@@ -16,10 +16,15 @@ const TextualInput = ({ name, type = 'text', label = '', icon, invalidity, value
 	return (
 		<Label>
 			{label}
-			<InputContainer className={touched ? 'touched' : ''} title={invalidity}>
-				{icon}
-				<Input name={name} type={type} value={value} onChange={handleChange} onBlur={onBlur} required />
-			</InputContainer>
+			<Input
+				name={name}
+				type={type}
+				value={value}
+				autocomplete={autocomplete}
+				onChange={handleChange}
+				onBlur={onBlur}
+				required
+			/>
 		</Label>
 	);
 };

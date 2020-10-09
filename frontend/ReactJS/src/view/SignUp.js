@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
 import { Container, FormContainer, ContentContainer, SubmitButton } from './styles/Auth';
-import { FaAt, FaUser } from 'react-icons/fa';
 import WarnError from '../utils/Errors/warnError';
 
 import { PasswordInput, TextualInput } from '../components/General/Inputs';
@@ -75,7 +74,7 @@ const Register = () => {
 						<TextualInput
 							label="Username"
 							name="username"
-							icon={<FaUser />}
+							autocomplete="username"
 							value={data.username}
 							onChange={handleInput}
 							required
@@ -84,7 +83,7 @@ const Register = () => {
 							label="Email"
 							name="email"
 							type="email"
-							icon={<FaAt />}
+							autocomplete="email"
 							value={data.email}
 							onChange={handleInput}
 							required
@@ -99,7 +98,7 @@ const Register = () => {
 							required
 						/>
 
-						<SubmitButton type="submit" isLoading={isLoading} disabled={isLoading}>
+						<SubmitButton type="submit" block isLoading={isLoading} disabled={isLoading}>
 							SIGN UP
 						</SubmitButton>
 					</form>

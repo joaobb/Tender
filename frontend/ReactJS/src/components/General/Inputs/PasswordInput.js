@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 
-import { FaLock } from 'react-icons/fa';
 import { BsEyeFill, BsEyeSlashFill } from 'react-icons/bs';
 
-import { Label, PasswordInputCamp, InputContainer, PasswordVisibility } from './styles';
+import { Label, PasswordInputCamp, PasswordVisibility, FormRow } from './styles';
 
 const PasswordInput = ({ label = 'Password', value, onChange, title, isConfirmation = false }) => {
 	const [showPassword, setShowPassword] = useState(false);
@@ -13,9 +12,10 @@ const PasswordInput = ({ label = 'Password', value, onChange, title, isConfirmat
 	return (
 		<Label>
 			{label}
-			<InputContainer>
-				<FaLock />
+
+			<FormRow>
 				<PasswordInputCamp
+					autoComplete={isConfirmation ? 'new-password' : 'password'}
 					name={`password${confirmation}`}
 					type={showPassword ? 'text' : 'password'}
 					value={value}
@@ -27,7 +27,7 @@ const PasswordInput = ({ label = 'Password', value, onChange, title, isConfirmat
 					{showPassword ? <BsEyeSlashFill title="Hide password" /> : <BsEyeFill title="Show password" />}
 					<input type="checkbox" onChange={() => setShowPassword(!showPassword)} />
 				</PasswordVisibility>
-			</InputContainer>
+			</FormRow>
 		</Label>
 	);
 };

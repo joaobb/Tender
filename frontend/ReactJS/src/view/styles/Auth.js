@@ -41,11 +41,14 @@ export const ContentContainer = styled.div`
 `;
 
 export const SubmitButton = styled.button`
-	width: 365px;
-	padding: 15px 50px;
+	width: ${({ block }) => (block ? '100%' : '365px')};
+	height: ${({ height }) => (height ? height : 'initial')};
+
+	padding: 12px 0;
+
 	margin-top: 15px;
 
-	border-radius: 50px;
+	border-radius: 12px;
 	border: none;
 	background-image: linear-gradient(190deg, rgb(242, 146, 43) 0%, rgb(211, 47, 45) 100%);
 
@@ -71,7 +74,7 @@ export const FormContainer = styled.div`
 	justify-content: space-evenly;
 
 	width: fit-content;
-	border-radius: 30px;
+	border-radius: 16px;
 	padding: 20px 20px 40px;
 
 	background-color: white;

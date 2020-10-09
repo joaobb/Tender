@@ -26,17 +26,39 @@ export const InputContainer = styled.div`
 	background-color: white;
 `;
 
+const GeneralInputStyle = `
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 24px;
+	box-sizing: border-box;
+	height: 40px;
+	padding: 10px 16px;
+	outline: none;
+	border-radius: 8px;
+	color: #0d0c22;
+	background-color: #f3f3f4;
+	border: 1px solid transparent;
+
+	width: 100%;
+
+	transition: all 200ms ease;
+
+	margin: 5px 0 12px;
+
+	&:focus, 
+	&:hover {
+		transition: all 200ms ease;
+
+    -webkit-box-shadow: 0 0 0 4px rgba(242, 146, 43,0.1);
+    box-shadow: 0 0 0 4px rgba(242, 146, 43,0.1);
+
+		background-color: white;
+		border: 1px solid rgba(242, 146, 43,0.4);
+	}
+`;
+
 export const Input = styled.input`
-	width: 85%;
-	padding: 5px 10px;
-
-	border: none;
-	border-radius: 5px;
-
-	background-color: transparent;
-
-	font-size: large;
-	color: ${colors.grayFont};
+	${GeneralInputStyle}
 
 	&[type='password'] {
 		font-weight: bold;
@@ -44,10 +66,20 @@ export const Input = styled.input`
 `;
 
 export const PasswordInputCamp = styled(Input)`
-	width: 75%;
+	width: 100%;
+	padding-right: 35px;
+`;
+
+export const FormRow = styled.div`
+	position: relative;
 `;
 
 export const PasswordVisibility = styled.label`
+	position: absolute;
+	right: 10px;
+	top: 50%;
+	transform: translateY(-50%);
+
 	cursor: pointer;
 
 	input {

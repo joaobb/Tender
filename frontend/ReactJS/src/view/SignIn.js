@@ -2,12 +2,11 @@ import React, { useState } from 'react';
 
 import { Container, ContentContainer, FormContainer, SubmitButton } from './styles/Auth';
 
+import api from '../services/api';
 import WarnError from '../utils/Errors/warnError';
+import Notificate from '../utils/Notification';
 
 import { TextualInput, PasswordInput } from '../components/General/Inputs';
-import api from '../services/api';
-
-import Notificate from '../utils/Notification';
 
 const INITIAL_DATA = {
 	email: '',
@@ -72,7 +71,7 @@ const Login = () => {
 						<TextualInput type="email" name="email" label="Email" value={data.email} onChange={handleInput} />
 						<PasswordInput value={data.password} onChange={handleInput} />
 
-						<SubmitButton type="submit" isLoading={isLoading} disabled={isLoading}>
+						<SubmitButton type="submit" block isLoading={isLoading} disabled={isLoading}>
 							SIGN IN
 						</SubmitButton>
 					</form>

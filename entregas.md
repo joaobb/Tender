@@ -20,3 +20,8 @@
 ### Entrega #5:
 #### Um subcomponente com...
 - Estado sendo definido por um GET: [entrega](https://github.com/joaobb/Tender/blob/master/frontend/ReactJS/src/view/Recipes/RecipeForm.js#L42)
+
+
+### Entrega #6:
+#### Testar um componente que tenha...
+- Props e alteração de estado: [entrega](https://github.com/joaobb/Tender/blob/master/frontend/ReactJS/src/App.test.js)

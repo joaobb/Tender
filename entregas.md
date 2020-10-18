@@ -15,7 +15,7 @@
 
 ### Entrega #4:
 #### Um subcomponente com...
-- Props sendo afetado pelo estado do componente pai: [entrega](https://github.com/joaobb/Tender/blob/master/frontend/ReactJS/src/components/General/Inputs/PasswordInput.js#L8)
+- Props sendo afetado pelo estado do componente pai: [entrega](https://github.com/joaobb/Tender/blob/master/frontend/ReactJS/src/view/SignIn.js#L74)
 
 ### Entrega #5:
 #### Um subcomponente com...

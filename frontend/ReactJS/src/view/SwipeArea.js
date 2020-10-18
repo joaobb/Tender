@@ -17,7 +17,7 @@ const SwipeArea = () => {
 	return (
 		<div>
 			HELLO AND WELLCOME TO THE <b>SWIPE AREA</b>{' '}
-			<SubmitButton type="button" onClick={goToRecipes}>
+			<SubmitButton type="button" isLoading onClick={goToRecipes}>
 				GO TO RECIPE CREATION
 			</SubmitButton>
 			<SubmitButton type="button" onClick={signOut}>

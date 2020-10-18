@@ -71,7 +71,7 @@ const Login = () => {
 						<TextualInput type="email" name="email" label="Email" value={data.email} onChange={handleInput} />
 						<PasswordInput value={data.password} onChange={handleInput} />
 
-						<SubmitButton type="submit" block isLoading={isLoading} disabled={isLoading}>
+						<SubmitButton type="submit" block isLoading={isLoading}>
 							SIGN IN
 						</SubmitButton>
 					</form>

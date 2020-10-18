@@ -40,7 +40,10 @@ export const ContentContainer = styled.div`
 	justify-content: space-between;
 `;
 
-export const SubmitButton = styled.button`
+export const SubmitButton = styled.button.attrs(({ isLoading }) => ({
+	disabled: isLoading ? true : false,
+	'data-testid': 'submitButton',
+}))`
 	width: ${({ block }) => (block ? '100%' : '365px')};
 	height: ${({ height }) => (height ? height : 'initial')};
 
@@ -64,6 +67,7 @@ export const SubmitButton = styled.button`
 		transition-duration: 200ms;
 		box-shadow: 0 0 10px rgb(33 33 33 / 0.5);
 		filter: brightness(1.05);
+		cursor: ${({ isLoading }) => (isLoading ? 'default' : 'pointer')};
 	}
 `;
 

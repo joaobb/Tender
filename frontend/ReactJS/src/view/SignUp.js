@@ -98,7 +98,7 @@ const Register = () => {
 							required
 						/>
 
-						<SubmitButton type="submit" block isLoading={isLoading} disabled={isLoading}>
+						<SubmitButton type="submit" block isLoading={isLoading}>
 							SIGN UP
 						</SubmitButton>
 					</form>

@@ -1,25 +1,26 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { SubmitButton } from './styles/Auth';
 
 const SwipeArea = () => {
-	const history = useHistory();
-
 	const signOut = () => {
 		localStorage.clear();
 		window.location.reload();
 	};
 
-	const goToRecipes = () => {
-		history.push('/recipes/new');
-	};
-
 	return (
-		<div>
-			HELLO AND WELLCOME TO THE <b>SWIPE AREA</b>{' '}
-			<SubmitButton type="button" onClick={goToRecipes}>
-				GO TO RECIPE CREATION
-			</SubmitButton>
+		<div
+			style={{
+				display: 'flex',
+				flexDirection: 'column',
+				alignItems: 'center',
+				justifyContent: 'center',
+				height: '100%',
+			}}
+		>
+			HELLO AND WELLCOME TO THE <b>TENDER</b>
+			<Link to="/recipes/new">GO TO RECIPE CREATION</Link>
+			<Link to="/swipe">GO TO SWIPE AREA</Link>
 			<SubmitButton type="button" onClick={signOut}>
 				SIGN OUT
 			</SubmitButton>

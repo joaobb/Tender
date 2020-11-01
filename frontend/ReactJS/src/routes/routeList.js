@@ -1,11 +1,18 @@
 import Access from '../view/Access';
 import SwipeArea from '../view/SwipeArea';
 import RecipeForm from '../view/Recipes/RecipeForm';
+import Swipe from '../view/SwipeArea/index';
 
 export const privateRouteList = [
 	{
 		path: '/',
 		component: SwipeArea,
+		exact: true,
+		title: 'Menu',
+	},
+	{
+		path: '/swipe',
+		component: Swipe,
 		exact: true,
 		title: 'Menu',
 	},

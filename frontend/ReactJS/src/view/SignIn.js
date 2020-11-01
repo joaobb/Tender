@@ -55,6 +55,7 @@ const Login = () => {
 
 			if (err instanceof WarnError) Notificate(err.message, 'warn');
 			else {
+				console.log(err);
 				const error = err.response.data.message;
 				Notificate(`An error occured during login: ${error}`, 'error');
 			}

@@ -1,12 +1,12 @@
 import { toast } from 'react-toastify';
 
-const Notificate = (text, type) => {
+const Notificate = (text, type, position = 'top-right', hideProgressBar = false) => {
 	let notification;
 	const options = {
 		containerId: 'toast',
-		position: 'top-right',
+		position: position,
 		autoClose: 3000,
-		hideProgressBar: false,
+		hideProgressBar: hideProgressBar,
 		closeOnClick: true,
 		pauseOnHover: true,
 		draggable: true,

@@ -1,9 +1,15 @@
 {
-  "env": {
-    "production": {
-      "plugins": [
-        "react-remove-properties"
-      ]
-    }
-  }
+	"env": {
+		"production": {
+			"plugins": ["react-remove-properties"]
+		}
+	},
+	"plugins": [
+		[
+			"module-resolver",
+			{
+				"root": ["./src"]
+			}
+		]
+	]
 }

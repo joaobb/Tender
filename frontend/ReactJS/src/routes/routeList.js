@@ -35,7 +35,7 @@ export const privateRouteList = [
 
 export const publicRouteList = [
   {
-    path: '/',
+    path: '/login',
     component: pages.Auth,
     exact: true,
     title: 'Sign In',

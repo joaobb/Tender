@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import User from '../UserDropdown';
 import Logo from '../Logo';
+import User from '../UserDropdown';
 
 import { Container } from './styles';
 

@@ -1,8 +1,8 @@
 import styled from 'styled-components';
-import colors from '../../styles/colors';
 
 import SignInImage from '../../assets/anne-sophie-benoit-Fan_HlAfpu0-unsplash.jpg';
 import SignUpImage from '../../assets/anne-sophie-benoit-Fan_HlAfpu0-unsplashh.jpg';
+import colors from '../../styles/colors';
 
 export const Container = styled.div`
   min-height: fit-content;

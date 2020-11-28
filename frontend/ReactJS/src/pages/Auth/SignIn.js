@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import GradientButton from '../../components/GradientButton';
-
+import { TextualInput, PasswordInput } from '../../components/Inputs';
+import UserContext from '../../contexts/userContext';
 import api from '../../services/api';
 import WarnError from '../../utils/Errors/warnError';
 import Notificate from '../../utils/Notification';
-
-import { TextualInput, PasswordInput } from '../../components/Inputs';
 
 import { Container, ContentContainer, FormContainer } from './styles';
 
@@ -18,9 +18,13 @@ const INITIAL_DATA = {
 };
 
 const SignIn = () => {
+  const history = useHistory();
+
   const [data, setData] = useState(INITIAL_DATA);
 
   const [isLoading, setIsLoading] = useState(false);
+
+  const { setUserData } = useContext(UserContext);
 
   const handleInput = (element) => {
     const { name, value } = element.target;
@@ -47,12 +51,13 @@ const SignIn = () => {
       const response = await api.post('/auth', body);
       const { token, user } = response.data;
 
+      setUserData({ token, ...user });
       localStorage.setItem('@Tender:token', token);
       localStorage.setItem('@Tender:user', JSON.stringify(user));
 
-      await Notificate(`Welcome again, ${user.username}.`, 'success');
+      Notificate(`Welcome again, ${user.username}.`, 'success');
 
-      window.location.reload();
+      history.push('/');
     } catch (err) {
       setIsLoading(false);
 

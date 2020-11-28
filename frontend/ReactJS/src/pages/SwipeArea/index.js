@@ -2,12 +2,11 @@ import React, { useState, useRef, useEffect } from 'react';
 import { AiOutlineClockCircle } from 'react-icons/ai';
 import { GrFormClose } from 'react-icons/gr';
 
-import { ReactComponent as Wok } from '../../assets/svg/wok.svg';
 import { ReactComponent as Brazil } from '../../assets/svg/countriesFlags/BRA.svg';
-
+import { ReactComponent as Wok } from '../../assets/svg/wok.svg';
 import api from '../../services/api';
-import Notificate from '../../utils/Notification';
 import { getRandomNumber } from '../../utils';
+import Notificate from '../../utils/Notification';
 
 import {
   Container,

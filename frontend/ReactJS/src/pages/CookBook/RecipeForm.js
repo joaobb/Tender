@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
-
 import { CgCloseO } from 'react-icons/cg';
-import WarnError from '../../utils/Errors/warnError';
 
+import GradientButton from '../../components/GradientButton';
 import api from '../../services/api';
+import WarnError from '../../utils/Errors/warnError';
 import Notificate from '../../utils/Notification';
 
 import {
@@ -20,8 +20,6 @@ import {
   FormInputContainer,
   MultipleEntityContainer,
 } from './recipeFormStyles';
-
-import GradientButton from '../../components/GradientButton';
 
 const NewRecipe = ({ match }) => {
   const { recipeID } = match.params;
@@ -190,7 +188,7 @@ const NewRecipe = ({ match }) => {
 };
 
 const ImageHeader = ({ value, onChange }) => {
-  return <ImageHeaderContainer src={value}></ImageHeaderContainer>;
+  return <ImageHeaderContainer src={value} />;
 };
 
 const NameInput = ({ value, onChange, ...props }) => {

@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-
 import { FaUserAlt } from 'react-icons/fa';
 import { NavLink } from 'react-router-dom';
 
-import Dropdown, { DropdownItem } from '../Dropdown';
-import { Container, UserDataContainer, Name, Email } from './styles';
 import { signOut } from '../../utils';
+import Dropdown, { DropdownItem } from '../Dropdown';
+
+import { Container, UserDataContainer, Name, Email } from './styles';
+
 const USER_DATA = JSON.parse(localStorage.getItem('@Tender:user'));
 
 const User = () => {

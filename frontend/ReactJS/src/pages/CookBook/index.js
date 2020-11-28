@@ -3,10 +3,9 @@ import React, { useState, useEffect } from 'react';
 import api from '../../services/api';
 import Notificate from '../../utils/Notification';
 
-import SelectedRecipeContext from './contexts/selectedRecipe';
 import Recipe from './components/Recipe';
 import RecipesSidebar from './components/RecipesSidebar';
-
+import SelectedRecipeContext from './contexts/selectedRecipe';
 import { Container } from './styles';
 
 const CookBook = () => {

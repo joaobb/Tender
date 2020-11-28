@@ -2,12 +2,9 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import GradientButton from '../../components/GradientButton';
-
-import WarnError from '../../utils/Errors/warnError';
-
 import { PasswordInput, TextualInput } from '../../components/Inputs';
-
 import api from '../../services/api';
+import WarnError from '../../utils/Errors/warnError';
 import Notificate from '../../utils/Notification';
 
 import { Container, FormContainer, ContentContainer } from './styles';
@@ -61,7 +58,7 @@ const SignUp = () => {
 
       Notificate(`Your account was registered successfully.`, 'success');
 
-      history.push('/');
+      history.push('/login');
     } catch (err) {
       setIsLoading(false);
 
@@ -101,7 +98,7 @@ const SignUp = () => {
             <PasswordInput
               label="Password confirmation"
               title="Confirm your password"
-              isConfirmation={true}
+              isConfirmation
               value={data.passwordConfirmation}
               onChange={handleInput}
               required

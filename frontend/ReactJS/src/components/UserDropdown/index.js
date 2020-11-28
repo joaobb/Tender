@@ -18,7 +18,7 @@ const User = () => {
       <FaUserAlt />
       <Dropdown isOpen={isOpen}>
         <UserData />
-        <DropdownItem to="/recipes" text="Recipe Book" />
+        <DropdownItem to="/cookbook" text="CookBook" />
         <DropdownItem onClick={signOut} text="Sign out" />
       </Dropdown>
     </Container>

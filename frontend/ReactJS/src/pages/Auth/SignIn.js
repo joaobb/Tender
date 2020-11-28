@@ -60,7 +60,7 @@ const SignIn = () => {
       else {
         console.log(err);
         const error = err.response.data.message;
-        Notificate(`An error occured during login: ${error}`, 'error');
+        Notificate(`An error occurred during login: ${error}`, 'error');
       }
     }
   };

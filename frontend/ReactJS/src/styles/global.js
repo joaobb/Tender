@@ -16,4 +16,13 @@ export default createGlobalStyle`
     button:hover {
         cursor: pointer;
     }
-`
+
+    .sscroll::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    .sscroll::-webkit-scrollbar-thumb {
+        background-color: #a8a8a8;
+        border-radius: 10px;
+    }
+`;

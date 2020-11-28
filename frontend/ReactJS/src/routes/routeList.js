@@ -2,16 +2,22 @@ import * as pages from '../pages';
 
 export const privateRouteList = [
   {
-    path: '/home',
-    component: pages.Home,
-    exact: true,
-    title: 'Menu',
-  },
-  {
     path: '/',
     component: pages.Swipe,
     exact: true,
     title: 'Menu',
+  },
+  {
+    path: '/home',
+    component: pages.Home,
+    exact: true,
+    title: 'Home',
+  },
+  {
+    path: '/cookbook',
+    component: pages.Recipes,
+    exact: true,
+    title: 'My CookBook',
   },
   {
     path: '/recipes/new',

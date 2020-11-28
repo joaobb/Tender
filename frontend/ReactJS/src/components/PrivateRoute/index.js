@@ -10,9 +10,11 @@ const PrivateRoute = ({
   path,
   exact,
   auth = false,
+  title,
   ...rest
 }) => {
   const isLogged = auth;
+  document.title = `${title} - Tender`;
 
   return (
     <React.Fragment key={`private ${path}`}>

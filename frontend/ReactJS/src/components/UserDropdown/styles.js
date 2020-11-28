@@ -35,7 +35,7 @@ export const UserDataContainer = styled.div`
   gap: 8px;
 
   width: 200px;
-  padding: 12px 40px 8px 16px;
+  padding: 12px 40px 12px 16px;
 `;
 
 export const Name = styled.strong`

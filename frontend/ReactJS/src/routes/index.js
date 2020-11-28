@@ -2,8 +2,8 @@ import React from 'react';
 
 import { BrowserRouter, Switch, Redirect } from 'react-router-dom';
 
-import PrivateRoute from '../components/General/PrivateRoute';
-import PublicRoute from '../components/General/PublicRoute';
+import PrivateRoute from '../components/PrivateRoute';
+import PublicRoute from '../components/PublicRoute';
 
 import { privateRouteList, publicRouteList } from './routeList';
 

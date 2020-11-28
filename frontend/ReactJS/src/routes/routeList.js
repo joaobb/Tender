@@ -1,46 +1,43 @@
-import Access from '../view/Access';
-import SwipeArea from '../view/SwipeArea';
-import RecipeForm from '../view/Recipes/RecipeForm';
-import Swipe from '../view/SwipeArea/index';
+import * as pages from '../pages';
 
 export const privateRouteList = [
-	{
-		path: '/',
-		component: SwipeArea,
-		exact: true,
-		title: 'Menu',
-	},
-	{
-		path: '/swipe',
-		component: Swipe,
-		exact: true,
-		title: 'Menu',
-	},
-	{
-		path: '/recipes/new',
-		component: RecipeForm,
-		exact: true,
-		title: 'New Recipe',
-	},
-	{
-		path: '/recipes/:recipeID/edit',
-		component: RecipeForm,
-		exact: true,
-		title: 'Edit Recipe',
-	},
+  {
+    path: '/home',
+    component: pages.Home,
+    exact: true,
+    title: 'Menu',
+  },
+  {
+    path: '/',
+    component: pages.Swipe,
+    exact: true,
+    title: 'Menu',
+  },
+  {
+    path: '/recipes/new',
+    component: pages.Recipes,
+    exact: true,
+    title: 'New Recipe',
+  },
+  {
+    path: '/recipes/:recipeID/edit',
+    component: pages.Recipes,
+    exact: true,
+    title: 'Edit Recipe',
+  },
 ];
 
 export const publicRouteList = [
-	{
-		path: '/',
-		component: Access,
-		exact: true,
-		title: 'Sign In',
-	},
-	{
-		path: '/register',
-		component: Access,
-		exact: true,
-		title: 'Sign Up',
-	},
+  {
+    path: '/',
+    component: pages.Auth,
+    exact: true,
+    title: 'Sign In',
+  },
+  {
+    path: '/register',
+    component: pages.Auth,
+    exact: true,
+    title: 'Sign Up',
+  },
 ];

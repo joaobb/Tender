@@ -21,7 +21,21 @@ const getAccount = async ({ res }) => {
       _id: account._id,
       email: account.email,
       username: account.username,
-      recipes: account.recipes,
+      role: account.role,
+    });
+  } catch (error) {
+    console.error(error);
+    res.json({ message: error.message });
+  }
+};
+
+const roleChange = async ({ res }) => {
+  try {
+    const { account } = res.locals;
+
+    res.json({
+      _id: account._id,
+      role: account.role,
     });
   } catch (error) {
     console.error(error);
@@ -47,4 +61,5 @@ module.exports = {
   createAccount,
   getAccount,
   getLikedRecipes,
+  roleChange,
 };

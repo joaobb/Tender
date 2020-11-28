@@ -1,121 +1,153 @@
-const ErrorHandler = require('../handlers/errorHandler');
+const ErrorHandler = require("../handlers/errorHandler");
 
-const Account = require('../../models/Account');
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const { ReqError } = require('../../helpers/ReqError');
+const Account = require("../../models/Account");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const { ReqError } = require("../../helpers/ReqError");
 
-const Recipes = require('./recipeService');
+const Recipes = require("./recipeService");
 
 const TOKEN_SECRET = process.env.TOKEN_SECRET;
 
 const createAccount = async (userData) => {
-	const SALT_ROUNDS = 10;
+  const SALT_ROUNDS = 10;
 
-	const { username, email, password } = userData;
+  const { username, email, password } = userData;
 
-	try {
-		// Hash the password
-		const salt = await bcrypt.genSalt(SALT_ROUNDS);
-		const passwordHash = await bcrypt.hash(password, salt);
+  try {
+    // Hash the password
+    const salt = await bcrypt.genSalt(SALT_ROUNDS);
+    const passwordHash = await bcrypt.hash(password, salt);
 
-		// Create a new account
-		const account = new Account({ username, email, passwordHash });
+    // Create a new account
+    const account = new Account({ username, email, passwordHash });
 
-		const response = await account.save();
-		return response;
-	} catch (error) {
-		ErrorHandler.handleError(req, res, error);
-	}
+    const response = await account.save();
+    return response;
+  } catch (error) {
+    ErrorHandler.handleError(req, res, error);
+  }
 };
 
 const getAccount = async (userToken) => {
-	try {
-		const accountID = await getAccountID(userToken);
+  try {
+    const accountID = await getAccountID(userToken);
 
-		const account = await Account.findById(accountID);
+    const account = await Account.findById(accountID);
 
-		return account;
-	} catch (error) {
-		throw error;
-	}
+    return account;
+  } catch (error) {
+    throw error;
+  }
 };
 
 const getUserRecipes = async (userToken) => {
-	try {
-		const accountID = await getAccountID(userToken);
+  try {
+    const accountID = await getAccountID(userToken);
 
-		const accountSeenRecipesObj = await Account.findById(accountID, {
-			_id: 0,
-			likedRecipes: 1,
-			passedRecipes: 1,
-		});
+    const accountSeenRecipesObj = await Account.findById(accountID, {
+      _id: 0,
+      likedRecipes: 1,
+      passedRecipes: 1,
+    });
 
-		const accountSeenRecipes = [...accountSeenRecipesObj.likedRecipes, ...accountSeenRecipesObj.passedRecipes];
+    const accountSeenRecipes = [
+      ...accountSeenRecipesObj.likedRecipes,
+      ...accountSeenRecipesObj.passedRecipes,
+    ];
 
-		return accountSeenRecipes;
-	} catch (error) {
-		throw error;
-	}
+    return accountSeenRecipes;
+  } catch (error) {
+    throw error;
+  }
 };
 
 const likeRecipe = async (userToken, recipeID) => {
-	try {
-		const accountID = await getAccountID(userToken);
+  try {
+    const accountID = await getAccountID(userToken);
 
-		await Account.findByIdAndUpdate(accountID, { $addToSet: { likedRecipes: recipeID } });
+    await Account.findByIdAndUpdate(accountID, {
+      $addToSet: { likedRecipes: recipeID },
+    });
 
-		return { match: true };
-	} catch (error) {
-		throw error;
-	}
+    return { match: true };
+  } catch (error) {
+    throw error;
+  }
 };
 
 const passRecipe = async (userToken, recipeID) => {
-	try {
-		const accountID = await getAccountID(userToken);
+  try {
+    const accountID = await getAccountID(userToken);
 
-		await Account.findByIdAndUpdate(accountID, { $addToSet: { passedRecipes: recipeID } });
+    await Account.findByIdAndUpdate(accountID, {
+      $addToSet: { passedRecipes: recipeID },
+    });
 
-		return { match: false };
-	} catch (error) {
-		throw error;
-	}
+    return { match: false };
+  } catch (error) {
+    throw error;
+  }
 };
 
-const getAccountID = (userToken) => {
-	try {
-		if (!userToken || typeof userToken !== 'string') {
-			throw new ReqError('A strange error occured, please login and try again.', 401);
-		}
-		const accountID = jwt.verify(userToken, TOKEN_SECRET)._id;
+const getAccountID = (userToken, withRole = false) => {
+  try {
+    if (!userToken || typeof userToken !== "string") {
+      throw new ReqError(
+        "A strange error occured, please login and try again.",
+        401
+      );
+    }
 
-		return accountID;
-	} catch (error) {
-		throw error;
-	}
+    const { _id: accountID, role } = jwt.verify(userToken, TOKEN_SECRET);
+
+    return !withRole ? accountID : { accountID, role };
+  } catch (error) {
+    throw error;
+  }
 };
 
 const getLikedRecipes = async (userToken) => {
-	try {
-		const accountID = await getAccountID(userToken);
+  try {
+    const accountID = await getAccountID(userToken);
 
-		const account = await Account.findById(accountID);
+    const account = await Account.findById(accountID);
 
-		const likedRecipes = await Recipes.getRecipesFromArray(account.likedRecipes);
+    const likedRecipes = await Recipes.getRecipesFromArray(
+      account.likedRecipes
+    );
 
-		return likedRecipes;
-	} catch (error) {
-		throw error;
-	}
+    return likedRecipes;
+  } catch (error) {
+    throw error;
+  }
+};
+
+const changeRole = async (accountID, role) => {
+  try {
+    const account = await Account.findByIdAndUpdate(accountID, {
+      role,
+    });
+
+    if (!account)
+      throw new ReqError(
+        "Hey fellow, there is no user with that accountID! Check it and try again.",
+        400
+      );
+
+    return { _id: accountID, role };
+  } catch (error) {
+    throw error;
+  }
 };
 
 module.exports = {
-	getAccountID,
-	createAccount,
-	getAccount,
-	getUserRecipes,
-	likeRecipe,
-	passRecipe,
-	getLikedRecipes,
+  getAccountID,
+  createAccount,
+  changeRole,
+  getAccount,
+  getUserRecipes,
+  likeRecipe,
+  passRecipe,
+  getLikedRecipes,
 };

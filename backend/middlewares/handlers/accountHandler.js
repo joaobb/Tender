@@ -48,7 +48,22 @@ const handleGetAccount = async (req, res, next) => {
 	}
 };
 
+const handleGetLiked = async (req, res, next) => {
+	try {
+		const userToken = req.header('Authorization');
+
+		const response = await AccountService.getLikedRecipes(userToken);
+
+		res.locals['likedRecipes'] = response;
+
+		next();
+	} catch (error) {
+		ErrorHandler.handleError(req, res, error);
+	}
+};
+
 module.exports = {
 	handleCreateAccount,
 	handleGetAccount,
+	handleGetLiked,
 };

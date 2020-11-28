@@ -5,6 +5,8 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { ReqError } = require('../../helpers/ReqError');
 
+const Recipes = require('./recipeService');
+
 const TOKEN_SECRET = process.env.TOKEN_SECRET;
 
 const createAccount = async (userData) => {
@@ -94,6 +96,20 @@ const getAccountID = (userToken) => {
 	}
 };
 
+const getLikedRecipes = async (userToken) => {
+	try {
+		const accountID = await getAccountID(userToken);
+
+		const account = await Account.findById(accountID);
+
+		const likedRecipes = await Recipes.getRecipesFromArray(account.likedRecipes);
+
+		return likedRecipes;
+	} catch (error) {
+		throw error;
+	}
+};
+
 module.exports = {
 	getAccountID,
 	createAccount,
@@ -101,4 +117,5 @@ module.exports = {
 	getUserRecipes,
 	likeRecipe,
 	passRecipe,
+	getLikedRecipes,
 };

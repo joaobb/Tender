@@ -1,3 +1,5 @@
+const mongoose = require('mongoose');
+
 const { ReqError } = require('../../helpers/ReqError');
 const Recipe = require('../../models/Recipe');
 
@@ -95,6 +97,20 @@ const getCuisines = async () => {
 	}
 };
 
+const getRecipesFromArray = async (recipesIDs = []) => {
+	try {
+		const recipes = Recipe.find({
+			_id: {
+				$in: [...recipesIDs.map((recipeID) => mongoose.Types.ObjectId(recipeID))],
+			},
+		});
+
+		return recipes;
+	} catch (err) {
+		throw err;
+	}
+};
+
 module.exports = {
 	getRandomRecipes,
 	getRecipe,
@@ -102,4 +118,5 @@ module.exports = {
 	updateRecipe,
 	deleteRecipe,
 	getCuisines,
+	getRecipesFromArray,
 };

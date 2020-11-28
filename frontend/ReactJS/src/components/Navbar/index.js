@@ -2,8 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import User from '../UserDropdown';
-import { Container } from './styles';
 import Logo from '../Logo';
+
+import { Container } from './styles';
 
 const Navbar = () => {
   return (

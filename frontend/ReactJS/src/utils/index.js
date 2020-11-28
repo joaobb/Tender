@@ -1,3 +1,8 @@
 const getRandomNumber = () => Math.trunc((Math.random() - 0.5) * 20);
 
-export { getRandomNumber };
+const signOut = () => {
+  localStorage.clear();
+  window.location.replace('/');
+};
+
+export { getRandomNumber, signOut };

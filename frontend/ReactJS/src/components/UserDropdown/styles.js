@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const Container = styled.button`
+  position: relative;
   background-color: transparent;
 
   border: 3px solid #f0f0f0;
@@ -25,4 +26,22 @@ export const Container = styled.button`
 
   ${({ active }) =>
     active ? { borderColor: '#eb7a38', backgroundColor: '#fafafa' } : ''}
+`;
+
+export const UserDataContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+
+  width: 200px;
+  padding: 12px 40px 8px 16px;
+`;
+
+export const Name = styled.strong`
+  font-size: 16px;
+`;
+export const Email = styled.small`
+  color: #5d6467;
+  font-size: 0.8rem;
 `;

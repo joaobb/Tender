@@ -57,7 +57,7 @@ export const Container = styled.div`
 `;
 
 export const Drag = styled.div`
-  z-index: ${({ position }) => 1000 - position};
+  z-index: ${({ position }) => 100 - position};
 
   background: #f6fbfd;
   height: 600px;

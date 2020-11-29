@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import colors from '../../styles/colors';
 
 export const Label = styled.label`
-  width: 380px;
+  width: ${({ block }) => (block ? '380px' : 'fit-content')};
 
   padding: 8px 10px 10px;
   margin-bottom: 15px;
@@ -14,7 +14,7 @@ export const Label = styled.label`
   border-radius: 10px;
 
   color: ${colors.darkGreen};
-  font-weight: bold;
+  font-weight: ${({ thinLabel }) => (thinLabel ? '500' : 'bold')};
 
   @media screen and (max-width: 450px) {
     width: max-content;

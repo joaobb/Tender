@@ -78,6 +78,7 @@ const SignUp = () => {
 
           <form onSubmit={onSubmit}>
             <TextualInput
+              block
               label="Username"
               name="username"
               autocomplete="username"
@@ -86,6 +87,7 @@ const SignUp = () => {
               required
             />
             <TextualInput
+              block
               label="Email"
               name="email"
               type="email"

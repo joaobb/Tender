@@ -1,15 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { FaUserAlt } from 'react-icons/fa';
-import { NavLink } from 'react-router-dom';
 
+import UserContext from '../../contexts/userContext';
 import { signOut } from '../../utils';
 import Dropdown, { DropdownItem } from '../Dropdown';
 
 import { Container, UserDataContainer, Name, Email } from './styles';
 
-const USER_DATA = JSON.parse(localStorage.getItem('@Tender:user'));
-
 const User = () => {
+  const { userData } = useContext(UserContext);
   const [isOpen, setIsOpen] = useState(false);
 
   const handleToggle = () => setIsOpen(!isOpen);
@@ -18,7 +17,7 @@ const User = () => {
     <Container active={isOpen} onClick={handleToggle}>
       <FaUserAlt />
       <Dropdown isOpen={isOpen}>
-        <UserData />
+        <UserData username={userData.username} email={userData.email} />
         <DropdownItem to="/cookbook" text="CookBook" />
         <DropdownItem onClick={signOut} text="Sign out" />
       </Dropdown>
@@ -26,10 +25,10 @@ const User = () => {
   );
 };
 
-const UserData = () => (
+const UserData = ({ username, email }) => (
   <UserDataContainer>
-    <Name>{USER_DATA.username ?? 'Hello there'}</Name>
-    <Email>{USER_DATA.email ?? 'How are you?'}</Email>
+    <Name>{username ?? 'Hello there'}</Name>
+    <Email>{email ?? 'How are you?'}</Email>
   </UserDataContainer>
 );
 

@@ -20,7 +20,7 @@ const PasswordInput = ({
   const confirmation = isConfirmation ? 'Confirmation' : '';
 
   return (
-    <Label>
+    <Label block>
       {label}
 
       <FormRow>

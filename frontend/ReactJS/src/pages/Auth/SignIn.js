@@ -78,11 +78,13 @@ const SignIn = () => {
 
           <form onSubmit={onSubmit}>
             <TextualInput
+              block
               type="email"
               name="email"
               label="Email"
               value={data.email}
               onChange={handleInput}
+              required
             />
             <PasswordInput value={data.password} onChange={handleInput} />
 

@@ -10,6 +10,8 @@ export const initialUser = {
 
 const UserContext = createContext({
   userData: initialUser,
+  isAdmin: false,
+  canCreate: false,
   setUserData: () => {},
 });
 

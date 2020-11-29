@@ -4,6 +4,7 @@ import { BrowserRouter, Switch, Redirect } from 'react-router-dom';
 import PrivateRoute from '../components/PrivateRoute';
 import PublicRoute from '../components/PublicRoute';
 import UserContext, { initialUser } from '../contexts/userContext';
+import ROLES from '../utils/roles';
 
 import { privateRouteList, publicRouteList } from './routeList';
 
@@ -22,7 +23,14 @@ const Routes = () => {
   const isAuth = Boolean(user.token);
 
   return (
-    <UserContext.Provider value={{ userData: user, setUserData: setUser }}>
+    <UserContext.Provider
+      value={{
+        userData: user,
+        setUserData: setUser,
+        isAdmin: user.role === ROLES.ROOT,
+        canCreate: user.role < ROLES.USER,
+      }}
+    >
       <BrowserRouter>
         {isAuth ? (
           <Switch>

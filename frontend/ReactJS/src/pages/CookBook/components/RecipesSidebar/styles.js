@@ -1,9 +1,18 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-export const Container = styled.div`
+export const Sidebar = styled.div`
   height: 70%;
-  min-width: 280px;
+  min-width: 300px;
+
+  & > header {
+    display: flex;
+    justify-content: space-between;
+  }
+`;
+
+export const Container = styled.div`
+  height: calc(100% - 68px);
 
   display: flex;
   flex-direction: column;
@@ -15,7 +24,7 @@ export const Container = styled.div`
 
 export const RecipesContainer = styled.div.attrs({ className: 'sscroll' })`
   overflow-y: auto;
-  border-radius: 30px;
+  border-radius: 0 0 30px;
 `;
 
 export const RecipeContainer = styled(Link)`
@@ -70,4 +79,27 @@ export const Title = styled.span`
 
 export const Cuisine = styled.small`
   text-transform: capitalize;
+`;
+
+export const NewRecipeContainer = styled(Link)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  text-decoration: none;
+
+  color: black;
+
+  height: 48px;
+  width: 48px;
+
+  border-radius: 50%;
+  /* margin-bottom: 20px; */
+
+  font-size: 1.4rem;
+
+  background-color: white;
+
+  box-shadow: ${({ isActive }) => (isActive ? 'inset' : '')} 0 4px 8px 4px
+    rgba(0, 0, 0, 0.1);
 `;

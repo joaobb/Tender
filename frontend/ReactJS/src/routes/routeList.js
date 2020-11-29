@@ -20,6 +20,12 @@ export const privateRouteList = [
     title: 'My CookBook',
   },
   {
+    path: '/cookbook/:id',
+    component: pages.Recipes,
+    exact: true,
+    title: 'My CookBook',
+  },
+  {
     path: '/recipes/new',
     component: pages.Recipes,
     exact: true,

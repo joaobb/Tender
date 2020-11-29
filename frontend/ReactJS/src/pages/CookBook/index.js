@@ -1,23 +1,29 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory, useParams } from 'react-router-dom';
 
 import api from '../../services/api';
 import Notificate from '../../utils/Notification';
 
 import Recipe from './components/Recipe';
 import RecipesSidebar from './components/RecipesSidebar';
-import SelectedRecipeContext from './contexts/selectedRecipe';
 import { Container } from './styles';
 
 const CookBook = () => {
+  const history = useHistory();
+  const { id: recipeID } = useParams();
+
   const [recipes, setRecipes] = useState([]);
-  const [selectedRecipe, setSelectedRecipe] = useState('');
 
   useEffect(() => {
     const fetchRecipes = async () => {
       try {
         const response = await api.get(`/account/cookbook`);
+        const { likedRecipes } = response.data.recipes;
 
-        setRecipes(response.data.recipes.likedRecipes);
+        setRecipes(likedRecipes);
+
+        if (!recipeID && likedRecipes.length > 0)
+          history.push(`/cookbook/${likedRecipes[0]._id}`);
       } catch (err) {
         Notificate(
           "Oh no! We couldn't find your cookbook, let me look under the bed.",
@@ -29,19 +35,11 @@ const CookBook = () => {
     fetchRecipes();
   }, []);
 
-  const selectedRecipeObj = recipes.filter(
-    (recipe) => recipe._id === selectedRecipe,
-  )[0];
-
   return (
-    <SelectedRecipeContext.Provider
-      value={{ selected: selectedRecipe, setSelected: setSelectedRecipe }}
-    >
-      <Container>
-        <RecipesSidebar recipes={recipes} />
-        <Recipe recipe={selectedRecipeObj} />
-      </Container>
-    </SelectedRecipeContext.Provider>
+    <Container>
+      <RecipesSidebar recipes={recipes} selectedRecipe={recipeID} />
+      <Recipe />
+    </Container>
   );
 };
 

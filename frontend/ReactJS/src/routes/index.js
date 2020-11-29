@@ -8,11 +8,11 @@ import UserContext, { initialUser } from '../contexts/userContext';
 import { privateRouteList, publicRouteList } from './routeList';
 
 const Routes = () => {
-  const [user, setUser] = useState(initialUser);
+  const userToken = localStorage.getItem('@Tender:token');
+  const [user, setUser] = useState({ ...initialUser, token: userToken });
 
   useEffect(() => {
     let userData = localStorage.getItem('@Tender:user');
-    const userToken = localStorage.getItem('@Tender:token');
 
     if (userData) userData = JSON.parse(userData);
 

@@ -4,6 +4,7 @@ import { CgCloseO } from 'react-icons/cg';
 import GradientButton from '../../components/GradientButton';
 import api from '../../services/api';
 import WarnError from '../../utils/Errors/warnError';
+import nationalities, { getNationality } from '../../utils/nationalities';
 import Notificate from '../../utils/Notification';
 
 import {
@@ -34,8 +35,6 @@ const NewRecipe = ({ match }) => {
   const [cookingMethod, setCookingMethod] = useState([]);
   const [cuisine, setCuisine] = useState('American');
 
-  const [possibleCuisines, setPossibleCuisines] = useState([]);
-
   useEffect(() => {
     const fetchRecipe = async () => {
       try {
@@ -63,19 +62,7 @@ const NewRecipe = ({ match }) => {
       }
     };
 
-    const getPossibleCuisines = async () => {
-      const response = await api.get('/recipes/cuisines');
-
-      const { data } = response;
-      setPossibleCuisines(data);
-    };
-
     if (recipeID) fetchRecipe();
-    getPossibleCuisines();
-
-    return () => {
-      setPossibleCuisines([]);
-    };
   }, []);
 
   const handleImage = (event) => {};
@@ -132,7 +119,7 @@ const NewRecipe = ({ match }) => {
       serves,
       ingredients,
       cooking_method: cookingMethod,
-      cuisine: [cuisine],
+      cuisine: [getNationality(cuisine).code],
       tags: [],
     };
 
@@ -166,11 +153,7 @@ const NewRecipe = ({ match }) => {
           <PrepTimeInput value={prepTime} onChange={handlePrepTime} />
         </FormRow>
 
-        <CuisineInput
-          value={cuisine}
-          onChange={handleCuisine}
-          possibleCuisines={possibleCuisines}
-        />
+        <CuisineInput value={cuisine} onChange={handleCuisine} />
         <IngredientsInput value={ingredients} onChange={handleIngredients} />
         <CookingMethodInput
           value={cookingMethod}
@@ -193,9 +176,7 @@ const ImageHeader = ({ value, onChange }) => {
 
 const NameInput = ({ value, onChange, ...props }) => {
   const handleChange = (event) => {
-    const { value } = event.target;
-
-    onChange(value);
+    onChange(event.target.value);
   };
 
   return (
@@ -213,9 +194,8 @@ const NameInput = ({ value, onChange, ...props }) => {
 
 const ServesInput = ({ value, onChange, ...props }) => {
   const handleChange = (event) => {
-    const { value } = event.target;
-
-    if (/^\d*$/.test(value) && Number(value) <= 9000) onChange(Number(value));
+    if (/^\d*$/.test(event.target.value) && Number(event.target.value) <= 9000)
+      onChange(Number(event.target.value));
   };
 
   return (
@@ -233,9 +213,7 @@ const ServesInput = ({ value, onChange, ...props }) => {
 
 const PrepTimeInput = ({ value, onChange, ...props }) => {
   const handleChange = (event) => {
-    const { value } = event.target;
-
-    if (/^\d*$/.test(value)) onChange(Number(value));
+    if (/^\d*$/.test(event.target.value)) onChange(Number(event.target.value));
   };
 
   return (
@@ -253,52 +231,35 @@ const PrepTimeInput = ({ value, onChange, ...props }) => {
   );
 };
 
-const CuisineInput = ({ value, onChange, possibleCuisines }) => {
+const CuisineInput = ({ value, onChange }) => {
   const [isNewCuisine, setIsNewCuisine] = useState(false);
 
   const handleSelectChange = (event) => {
-    const { value } = event.target;
-    if (!isNewCuisine && value === 'new cuisine') {
+    if (!isNewCuisine && event.target.value === 'new cuisine') {
       onChange('');
       setIsNewCuisine(true);
     } else {
       setIsNewCuisine(false);
-      onChange(value);
+      onChange(event.target.value);
     }
-  };
-
-  const handleNewCuisine = (event) => {
-    const { value } = event.target;
-    onChange(value);
   };
 
   return (
     <FormInputContainer>
       <label htmlFor="cuisine-input">Cuisine</label>
-      <Select
+      <Input
         id="cuisine-input"
-        value={isNewCuisine ? 'new cuisine' : value}
+        value={value}
         onChange={handleSelectChange}
-      >
-        {possibleCuisines.map((cuisine, index) =>
-          cuisine.trim() ? (
-            <option key={`cuisine#${index + 1} - ${cuisine}`} value={cuisine}>
-              {cuisine}
-            </option>
-          ) : null,
-        )}
-        <option value="new cuisine">Create a new cuisine</option>
-      </Select>
-      {isNewCuisine && (
-        <FormInputContainer>
-          <label htmlFor="new-cuisine-input">New cuisine</label>
-          <Input
-            id="new-cuisine-input"
-            value={value}
-            onChange={handleNewCuisine}
-          />
-        </FormInputContainer>
-      )}
+        list="nationalities"
+      />
+      <datalist id="nationalities">
+        {Object.values(nationalities).map((cuisine) => (
+          <option key={cuisine.code} value={cuisine.nationality}>
+            {cuisine.code}
+          </option>
+        ))}
+      </datalist>
     </FormInputContainer>
   );
 };

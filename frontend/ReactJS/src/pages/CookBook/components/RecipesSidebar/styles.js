@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const Container = styled.div`
@@ -17,16 +18,18 @@ export const RecipesContainer = styled.div.attrs({ className: 'sscroll' })`
   border-radius: 30px;
 `;
 
-export const RecipeContainer = styled.button.attrs({ type: 'button' })`
+export const RecipeContainer = styled(Link)`
   display: flex;
   align-items: center;
-
   column-gap: 18px;
 
   padding: 10px 20px;
   width: 100%;
   background-color: transparent;
   border: none;
+
+  text-decoration: none;
+  color: #2c2c2c;
 
   transition: all 100ms ease-in-out;
 

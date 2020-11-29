@@ -11,6 +11,7 @@ const getRandomRecipes = async (randomQtd, fullInfo, accountSeenRecipes) => {
       { $sample: { size: randomQtd } },
       { $project: { cooking_method: 0, author_id: 0, creation_date: 0 } },
     ]);
+
     return randomRecipes;
   } catch (err) {
     throw err;
@@ -42,7 +43,7 @@ const updateRecipe = async (recipeID, body, role, accountID) => {
     if (role === roles.USER)
       throw new ReqError(
         "Oh no! It seems like you don't have the permission to do this kind of things, but still your trying (▀̿̿Ĺ̯̿▀̿ ̿).",
-        400
+        400,
       );
 
     const query = {
@@ -55,7 +56,7 @@ const updateRecipe = async (recipeID, body, role, accountID) => {
     if (!recipe)
       throw new ReqError(
         "Either the selected recipe doesn't exist or you don't have the authorization to edit it.",
-        400
+        400,
       );
 
     return recipe;
@@ -72,7 +73,7 @@ const deleteRecipe = async (recipeID, accountID) => {
     if (!recipe)
       throw new ReqError(
         "Either the selected recipe doesn't exist or you don't have the authorization to delete it.",
-        400
+        400,
       );
 
     return recipe;
@@ -101,7 +102,7 @@ const getCuisines = async () => {
     ]);
 
     cuisines = cuisines[0].uniqueCuisines.map((cuisine) =>
-      cuisine.replace(/'/g, "")
+      cuisine.replace(/'/g, ""),
     );
 
     return cuisines;
@@ -112,13 +113,17 @@ const getCuisines = async () => {
 
 const getRecipesFromArray = async (recipesIDs = []) => {
   try {
-    const recipes = Recipe.find({
-      _id: {
-        $in: [
-          ...recipesIDs.map((recipeID) => mongoose.Types.ObjectId(recipeID)),
-        ],
+    const recipes = Recipe.aggregate([
+      { $match: { _id: { $in: recipesIDs } } },
+      {
+        $project: {
+          cooking_method: 0,
+          author_id: 0,
+          creation_date: 0,
+          ingredients: 0,
+        },
       },
-    });
+    ]);
 
     return recipes;
   } catch (err) {

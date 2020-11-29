@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const Container = styled.div`
   position: ${({ fullScreen }) => (fullScreen ? 'fixed' : 'absolute')};
 
-  z-index: 999;
+  z-index: 100;
 
   width: ${({ fullScreen }) => (fullScreen ? '100vw' : '100%')};
   height: ${({ fullScreen }) => (fullScreen ? '100vh' : '100%')};

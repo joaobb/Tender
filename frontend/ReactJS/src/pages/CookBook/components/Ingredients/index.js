@@ -7,7 +7,12 @@ import { Container } from './styles';
 const Ingredients = ({ data }) => {
   return (
     <Container>
-      <TextBallons numbered title="Ingredients" messages={data} />
+      <TextBallons
+        numbered
+        title="Ingredients"
+        messages={data}
+        type="ingredients"
+      />
     </Container>
   );
 };

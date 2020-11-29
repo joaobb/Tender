@@ -92,3 +92,53 @@ export const PasswordVisibility = styled.label`
     display: none;
   }
 `;
+
+export const ImageInputContainer = styled.div`
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+
+  border-top-right-radius: 30px;
+
+  &,
+  &::after {
+    transition: all 300ms ease-in-out;
+  }
+
+  div {
+    height: 100%;
+    width: 100%;
+
+    cursor: pointer;
+  }
+
+  &::after {
+    content: '';
+    opacity: 0;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    margin: auto;
+    border-radius: 12px;
+    padding: 7px;
+
+    font-size: 1rem;
+    background-color: #cdcdcd;
+  }
+
+  &:hover {
+    background-color: #cdcdcd59;
+
+    &::after {
+      content: ${({ isEmpty }) =>
+        `'Click to choose ${isEmpty ? 'an' : 'another'} image'`};
+      opacity: 1;
+    }
+  }
+`;

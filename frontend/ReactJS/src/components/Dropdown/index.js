@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Backdrop from '../Backdrop';
+
 import {
   Container,
   DropdownLinkContainer,
@@ -7,8 +9,20 @@ import {
   DropdownButtonContainer,
 } from './styles';
 
-const Dropdown = ({ isOpen, children }) => {
-  return isOpen ? <Container>{children}</Container> : null;
+const Dropdown = ({ isOpen, onToggle, inline, left, children, shadowed }) => {
+  return isOpen ? (
+    <>
+      <Container
+        left={left}
+        inline={inline}
+        isOpen={isOpen}
+        shadowed={shadowed}
+      >
+        {children}
+      </Container>
+      <Backdrop onClick={onToggle} />
+    </>
+  ) : null;
 };
 
 export const DropdownItem = ({ to, onClick, text, icon, ...props }) => {

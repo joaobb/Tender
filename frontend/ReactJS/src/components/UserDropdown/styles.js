@@ -41,7 +41,8 @@ export const UserDataContainer = styled.div`
 export const Name = styled.strong`
   font-size: 16px;
 `;
-export const Email = styled.small`
+
+export const Small = styled.small`
   color: #5d6467;
   font-size: 0.8rem;
 `;

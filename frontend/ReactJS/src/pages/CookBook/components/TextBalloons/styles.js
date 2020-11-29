@@ -13,12 +13,19 @@ export const Container = styled.div`
   }
 `;
 
+export const Messages = styled.ul`
+  margin-left: 10px;
+  list-style: none;
+  width: -webkit-fill-available;
+`;
+
 export const Title = styled.span`
   font-size: 2rem;
   font-weight: bold;
 `;
 
 export const MessageContainer = styled.li`
+  position: relative;
   color: #2c2c2c;
   font-size: ${({ isTitle }) => (isTitle ? '1.8rem' : 'initial')};
   font-weight: ${({ isTitle }) => (isTitle ? 'bold' : 'initial')};
@@ -27,6 +34,10 @@ export const MessageContainer = styled.li`
   padding: ${({ isTitle }) => (isTitle ? '12px' : '8px')} 20px;
 
   width: fit-content;
+
+  &:not(:first-child) {
+    max-width: calc(64% - ${({ size }) => Math.round(size * 0.05)}ch);
+  }
 
   border-radius: 8px 20px 20px 20px;
 
@@ -45,8 +56,17 @@ export const MessageContainer = styled.li`
   }
 `;
 
-export const Messages = styled.ul`
-  margin-left: 10px;
+export const OptionsContainer = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-  list-style: none;
+  position: absolute;
+  left: calc(100% + 5px);
+  top: 50%;
+  transform: translateY(-50%);
+
+  padding: 4px;
+  border: none;
+  border-radius: 50%;
 `;

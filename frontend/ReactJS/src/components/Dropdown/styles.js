@@ -1,10 +1,14 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-export const Container = styled.div`
+export const Container = styled.div.attrs(({ isOpen, shadowed }) => ({
+  className: isOpen && shadowed ? 'shadowed' : '',
+}))`
   position: absolute;
-  top: calc(100% + 10px);
+  top: ${({ inline }) => (!inline ? 'calc(100% + 10px)' : '0')};
   right: 0;
+
+  left: ${({ left }) => (left ? 'calc(100% + 10px)' : '')};
 
   display: flex;
   flex-direction: column;
@@ -15,6 +19,7 @@ export const Container = styled.div`
 
   border-radius: 8px;
   border: 1px solid #f0f0f0;
+  z-index: 2;
 `;
 
 const BaseItemContainer = `
@@ -23,6 +28,7 @@ const BaseItemContainer = `
   font-weight: 500;
   text-decoration: none;
   text-align: left;
+
 
   border: none;
   background-color: white;

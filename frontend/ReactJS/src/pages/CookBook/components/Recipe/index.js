@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 
 import Loader from '../../../../assets/Loader';
 import OriginFlag from '../../../../components/OriginFlag';
+import Tags from '../../../../components/Tags';
 import useFetch from '../../../../services/swr';
 import CookingMethod from '../CookingMethod';
 
@@ -11,7 +12,9 @@ import { Container, Image, Title, Small, RecipeBasics, Header } from './styles';
 const Recipe = () => {
   const { id } = useParams();
 
-  const { data } = useFetch(id ? `/recipes/${id}` : '');
+  const isNew = id === 'new';
+
+  const { data } = useFetch(id && !isNew ? `/recipes/${id}` : '');
 
   return (
     <Container>
@@ -34,6 +37,7 @@ const Recipe = () => {
               </div>
             </Header>
             <hr />
+            <Tags tags={data.tags} />
           </RecipeBasics>
         </>
       ) : (

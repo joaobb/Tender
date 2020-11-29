@@ -4,6 +4,7 @@ import { GrFormClose } from 'react-icons/gr';
 
 import { ReactComponent as Wok } from '../../assets/svg/wok.svg';
 import OriginFlag from '../../components/OriginFlag';
+import Tags from '../../components/Tags';
 import api from '../../services/api';
 import { getRandomNumber } from '../../utils';
 import Notificate from '../../utils/Notification';
@@ -19,8 +20,6 @@ import {
   Title,
   PrepTime,
   Serves,
-  TagsContainer,
-  Tag,
   PrepInfo,
   RecipeContainer,
   CardsContainer,
@@ -362,14 +361,6 @@ const RecipeCard = ({ image, title, tags, serves, origin, prepTime }) => (
       </PrepInfo>
     </DataContainer>
   </RecipeContainer>
-);
-
-const Tags = ({ tags }) => (
-  <TagsContainer>
-    {tags.map((tag) => (
-      <Tag key={tag}>{tag}</Tag>
-    ))}
-  </TagsContainer>
 );
 
 export default Tender;

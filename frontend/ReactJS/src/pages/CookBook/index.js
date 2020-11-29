@@ -5,6 +5,7 @@ import api from '../../services/api';
 import Notificate from '../../utils/Notification';
 
 import Recipe from './components/Recipe';
+import RecipeForm from './components/RecipeForm';
 import RecipesSidebar from './components/RecipesSidebar';
 import { Container } from './styles';
 
@@ -13,6 +14,8 @@ const CookBook = () => {
   const { id: recipeID } = useParams();
 
   const [recipes, setRecipes] = useState([]);
+
+  const isNew = recipeID === 'new';
 
   useEffect(() => {
     const fetchRecipes = async () => {
@@ -38,7 +41,7 @@ const CookBook = () => {
   return (
     <Container>
       <RecipesSidebar recipes={recipes} selectedRecipe={recipeID} />
-      <Recipe />
+      {!isNew ? <Recipe /> : <RecipeForm />}
     </Container>
   );
 };

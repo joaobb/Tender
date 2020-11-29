@@ -11,7 +11,7 @@ export const Sidebar = styled.div`
   }
 `;
 
-export const Container = styled.div`
+export const Container = styled.div.attrs({ className: 'shadowed' })`
   height: calc(100% - 68px);
 
   display: flex;
@@ -19,7 +19,6 @@ export const Container = styled.div`
 
   border-radius: 30px;
   background: white;
-  box-shadow: 0 4px 8px 4px rgba(0, 0, 0, 0.1);
 `;
 
 export const RecipesContainer = styled.div.attrs({ className: 'sscroll' })`
@@ -27,7 +26,9 @@ export const RecipesContainer = styled.div.attrs({ className: 'sscroll' })`
   border-radius: 30px;
 `;
 
-export const RecipeContainer = styled(Link)`
+export const RecipeContainer = styled(Link).attrs(({ isActive }) => ({
+  className: isActive ? 'shadowed--inset' : '',
+}))`
   display: flex;
   align-items: center;
   column-gap: 18px;
@@ -41,13 +42,6 @@ export const RecipeContainer = styled(Link)`
   color: #2c2c2c;
 
   transition: all 100ms ease-in-out;
-
-  ${({ isActive }) =>
-    isActive
-      ? {
-          boxShadow: 'inset 0 4px 8px 4px rgba(0, 0, 0, 0.1);',
-        }
-      : {}}
 
   &:hover {
     box-shadow: inset 0 4px 8px 4px rgba(0, 0, 0, 0.1);

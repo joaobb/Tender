@@ -5,9 +5,10 @@ export const Container = styled.div`
   width: ${({ block }) => (block ? '100%' : 'calc(100% - 68px)')};
 `;
 
-export const Toggler = styled.button.attrs({
+export const Toggler = styled.button.attrs(({ isOpen }) => ({
   type: 'button',
-})`
+  className: isOpen ? 'shadowed--inset' : 'shadowed',
+}))`
   width: 100%;
   height: 48px;
 
@@ -26,9 +27,6 @@ export const Toggler = styled.button.attrs({
 
   transition: all 200ms ease-in-out;
 
-  box-shadow: ${({ isOpen }) => (isOpen ? 'inset' : '')} 0 4px 8px 4px
-    rgba(0, 0, 0, 0.1);
-
   svg {
     margin-left: 10px;
     transition: transform 200ms ease-in-out;
@@ -42,7 +40,7 @@ export const FiltersContainer = styled.div`
   position: absolute;
   left: 102%;
   top: 0;
-  z-index: 1;
+  z-index: 101;
   transition: all 200ms ease-in-out;
   overflow: hidden;
 

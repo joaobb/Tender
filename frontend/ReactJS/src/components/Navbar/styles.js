@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Container = styled.nav`
+export const Container = styled.nav.attrs({ className: 'shadowed' })`
   position: absolute;
   z-index: 999;
 
@@ -20,7 +20,6 @@ export const Container = styled.nav`
   border-radius: 30px;
 
   background-color: white;
-  box-shadow: 0 4px 8px 4px rgba(0, 0, 0, 0.1);
 
   @media screen and (max-width: 768px) {
     width: 95vw;

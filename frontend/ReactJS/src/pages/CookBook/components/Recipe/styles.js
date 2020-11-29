@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
+export const Container = styled.div.attrs({ className: 'shadowed' })`
   position: relative;
 
   display: grid;
@@ -10,7 +10,6 @@ export const Container = styled.div`
   border-radius: 30px;
 
   background-color: white;
-  box-shadow: 0 4px 8px 4px rgba(0, 0, 0, 0.1);
 
   grid-template-areas:
     'cookingMethod recipeBasics'
@@ -51,8 +50,6 @@ export const Image = styled.div`
 `;
 
 export const Header = styled.div`
-  padding: 10px 16px;
-
   * {
     font-family: 'Raleway', sans-serif;
   }
@@ -78,5 +75,9 @@ export const RecipeBasics = styled.div`
 
   hr {
     border-color: #ffffff54;
+  }
+
+  & > div {
+    padding: 10px 16px;
   }
 `;

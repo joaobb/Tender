@@ -2,20 +2,11 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 
 import Loader from '../../../../assets/Loader';
-
+import OriginFlag from '../../../../components/OriginFlag';
 import useFetch from '../../../../services/swr';
-import { getFlag } from '../../../../utils/nationalities';
 import CookingMethod from '../CookingMethod';
 
-import {
-  Container,
-  Image,
-  Title,
-  Small,
-  Origin,
-  RecipeBasics,
-  Header,
-} from './styles';
+import { Container, Image, Title, Small, RecipeBasics, Header } from './styles';
 
 const Recipe = () => {
   const { id } = useParams();
@@ -35,7 +26,7 @@ const Recipe = () => {
             <Header>
               <div>
                 <Title>{data.name}</Title>
-                <Origin origin={getFlag(data.cuisine[0])} />
+                <OriginFlag origin={data.cuisine[0]} />
               </div>
               <div>
                 <Small>{data.prep_time} Min</Small>

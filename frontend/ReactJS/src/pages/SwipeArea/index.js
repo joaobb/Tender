@@ -2,8 +2,8 @@ import React, { useState, useRef, useEffect } from 'react';
 import { AiOutlineClockCircle } from 'react-icons/ai';
 import { GrFormClose } from 'react-icons/gr';
 
-import { ReactComponent as Brazil } from '../../assets/svg/countriesFlags/BRA.svg';
 import { ReactComponent as Wok } from '../../assets/svg/wok.svg';
+import OriginFlag from '../../components/OriginFlag';
 import api from '../../services/api';
 import { getRandomNumber } from '../../utils';
 import Notificate from '../../utils/Notification';
@@ -94,6 +94,7 @@ const Tender = () => {
               serves={recipe.serves}
               state={recipe.state}
               isActive={index === 0}
+              origin={recipe.cuisine[0] || 'US'}
               handleSwipe={handleSwipe}
             />
           ))
@@ -107,6 +108,7 @@ const Tender = () => {
             serves="2 Cups"
             state={0}
             isActive={false}
+            origin="BRA"
             handleSwipe={handleSwipe}
           />
         )}
@@ -136,6 +138,7 @@ const Card = ({
   tags,
   prepTime,
   serves,
+  origin,
   handleSwipe: handleCardSwipe,
 }) => {
   const [touched, setTouched] = useState(false);
@@ -333,19 +336,20 @@ const Card = ({
         title={title}
         tags={tags}
         serves={serves}
+        origin={origin}
         prepTime={prepTime}
       />
     </Drag>
   );
 };
 
-const RecipeCard = ({ image, title, tags, serves, prepTime }) => (
+const RecipeCard = ({ image, title, tags, serves, origin, prepTime }) => (
   <RecipeContainer>
     <ImageContainer src={image} />
     <DataContainer>
       <Header>
         <Title>{title}</Title>
-        <Brazil />
+        <OriginFlag origin={origin} />
       </Header>
 
       <Tags tags={tags} />

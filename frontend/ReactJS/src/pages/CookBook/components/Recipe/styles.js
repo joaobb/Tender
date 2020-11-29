@@ -72,13 +72,6 @@ export const Title = styled.h2`
 
 export const Small = styled.span``;
 
-export const Origin = styled.img.attrs(({ origin }) => ({
-  src: `${origin}`,
-}))`
-  border-radius: 50%;
-  width: 24px;
-`;
-
 export const RecipeBasics = styled.div`
   grid-area: recipeBasics;
   border-left: 1px solid #e8e8e8;

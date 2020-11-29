@@ -24,7 +24,7 @@ export const Container = styled.div`
 
 export const RecipesContainer = styled.div.attrs({ className: 'sscroll' })`
   overflow-y: auto;
-  border-radius: 0 0 30px;
+  border-radius: 30px;
 `;
 
 export const RecipeContainer = styled(Link)`
@@ -51,14 +51,6 @@ export const RecipeContainer = styled(Link)`
 
   &:hover {
     box-shadow: inset 0 4px 8px 4px rgba(0, 0, 0, 0.1);
-  }
-
-  &:first-child {
-    border-radius: 30px 30px 0 0;
-  }
-
-  &:last-child {
-    border-radius: 0 0 30px 30px;
   }
 `;
 

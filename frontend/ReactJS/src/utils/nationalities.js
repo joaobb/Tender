@@ -1506,7 +1506,7 @@ const getNationality = (part = '') => {
 };
 
 const getFlag = (part = '') => {
-  const code = (getNationality(part)?.smallCode ?? 'BRA').toLowerCase();
+  const code = (getNationality(part)?.smallCode ?? 'br').toLowerCase();
 
   return `https://hatscripts.github.io/circle-flags/flags/${code}.svg`;
 };

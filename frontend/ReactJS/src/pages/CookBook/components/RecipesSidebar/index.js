@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { GrAddCircle } from 'react-icons/gr';
+import { useHistory } from 'react-router-dom';
 
 import UserContext from '../../../../contexts/userContext';
 import { getNationality } from '../../../../utils/nationalities';
@@ -97,14 +98,23 @@ const Recipe = ({
   </RecipeContainer>
 );
 
-const NewRecipe = ({ isActive }) => (
-  <NewRecipeContainer
-    to="/cookbook/new"
-    isActive={isActive}
-    title="Create new recipe"
-  >
-    <GrAddCircle />
-  </NewRecipeContainer>
-);
+const NewRecipe = ({ isActive }) => {
+  const history = useHistory();
+
+  const handleClick = () => {
+    if (isActive) history.goBack();
+  };
+
+  return (
+    <NewRecipeContainer
+      to="/cookbook/new"
+      isActive={isActive}
+      title="Create new recipe"
+      onClick={handleClick}
+    >
+      <GrAddCircle />
+    </NewRecipeContainer>
+  );
+};
 
 export default RecipesSidebar;

@@ -2,7 +2,7 @@ const ErrorHandler = require("../handlers/errorHandler");
 
 const RecipeService = require("../services/recipeService.js");
 
-const { getAccountID, getUserRecipes } = require("../services/accountService");
+const AccountService = require("../services/accountService");
 
 const handleGetRandomRecipes = async (req, res, next) => {
   try {
@@ -11,7 +11,7 @@ const handleGetRandomRecipes = async (req, res, next) => {
 
     const userToken = req.header("Authorization");
 
-    const accountSeenRecipes = await getUserRecipes(userToken);
+    const accountSeenRecipes = await AccountService.getUserRecipes(userToken);
 
     const response = await RecipeService.getRandomRecipes(
       randomQtd,
@@ -46,9 +46,10 @@ const handleCreate = async (req, res, next) => {
     const body = req.body;
     const userToken = req.header("Authorization");
 
-    const accountID = getAccountID(userToken);
+    const accountID = AccountService.getAccountID(userToken);
 
     const response = await RecipeService.createRecipe(body, accountID);
+    await AccountService.addRecipe(accountID, response._id);
 
     res.locals["recipe"] = response;
 
@@ -64,7 +65,7 @@ const handleUpdate = async (req, res, next) => {
     const body = req.body;
     const userToken = req.header("Authorization");
 
-    const { accountID, role } = getAccountID(userToken, true);
+    const { accountID, role } = AccountService.getAccountID(userToken, true);
 
     const response = await RecipeService.updateRecipe(
       recipeID,
@@ -86,7 +87,7 @@ const handleDelete = async (req, res, next) => {
     const recipeID = req.params.id;
     const userToken = req.header("Authorization");
 
-    const accountID = getAccountID(userToken);
+    const accountID = AccountService.getAccountID(userToken);
 
     const response = await RecipeService.deleteRecipe(recipeID, accountID);
 

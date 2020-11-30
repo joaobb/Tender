@@ -4,6 +4,8 @@ const { ReqError } = require("../../helpers/ReqError");
 const Recipe = require("../../models/Recipe");
 const roles = require("../../utils/enums/role.enum");
 
+const cloudinaryService = require("./cloudinaryService");
+
 const getRandomRecipes = async (randomQtd, fullInfo, accountSeenRecipes) => {
   try {
     const randomRecipes = await Recipe.aggregate([
@@ -11,6 +13,10 @@ const getRandomRecipes = async (randomQtd, fullInfo, accountSeenRecipes) => {
       { $sample: { size: randomQtd } },
       { $project: { cooking_method: 0, author_id: 0, creation_date: 0 } },
     ]);
+
+    const a = await Recipe.count()
+
+    console.log(a);
 
     return randomRecipes;
   } catch (err) {
@@ -29,7 +35,15 @@ const getRecipe = async (recipeID) => {
 
 const createRecipe = async (body, accountID) => {
   try {
-    const recipe = new Recipe({ ...body, author_id: accountID });
+    const { image } = body;
+
+    const imageURL = await cloudinaryService.uploadBase64(image);
+
+    const recipe = new Recipe({
+      ...body,
+      author_id: accountID,
+      image: imageURL,
+    });
 
     const savedRecipe = await recipe.save();
     return savedRecipe;
@@ -101,9 +115,11 @@ const getCuisines = async () => {
       },
     ]);
 
-    cuisines = cuisines[0].uniqueCuisines.map((cuisine) =>
-      cuisine.replace(/'/g, ""),
-    );
+    if (cuisines.length) {
+      cuisines = cuisines[0].uniqueCuisines.map((cuisine) =>
+        cuisine.replace(/'/g, ""),
+      );
+    }
 
     return cuisines;
   } catch (err) {

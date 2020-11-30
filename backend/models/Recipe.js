@@ -35,4 +35,4 @@ const RecipeSchema = mongoose.Schema({
   tags: [String],
 });
 
-module.exports = mongoose.model("recipesTest", RecipeSchema);
+module.exports = mongoose.model("recipe", RecipeSchema);

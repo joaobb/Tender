@@ -5,7 +5,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { ReqError } = require("../../helpers/ReqError");
 
-const Recipes = require("./recipeService");
+const RecipeService = require("./recipeService");
 
 const TOKEN_SECRET = process.env.TOKEN_SECRET;
 
@@ -95,7 +95,7 @@ const getAccountID = (userToken, withRole = false) => {
     if (!userToken || typeof userToken !== "string") {
       throw new ReqError(
         "A strange error occured, please login and try again.",
-        401
+        401,
       );
     }
 
@@ -113,8 +113,8 @@ const getLikedRecipes = async (userToken) => {
 
     const account = await Account.findById(accountID);
 
-    const likedRecipes = await Recipes.getRecipesFromArray(
-      account.likedRecipes
+    const likedRecipes = await RecipeService.getRecipesFromArray(
+      account.likedRecipes,
     );
 
     return likedRecipes;
@@ -132,10 +132,22 @@ const changeRole = async (accountID, role) => {
     if (!account)
       throw new ReqError(
         "Hey fellow, there is no user with that accountID! Check it and try again.",
-        400
+        400,
       );
 
     return { _id: accountID, role };
+  } catch (error) {
+    throw error;
+  }
+};
+
+const addRecipe = async (accountID, recipeID) => {
+  try {
+    await Account.findByIdAndUpdate(accountID, {
+      $addToSet: { createdRecipes: recipeID },
+    });
+
+    return { _id: accountID, recipeID };
   } catch (error) {
     throw error;
   }
@@ -150,4 +162,5 @@ module.exports = {
   likeRecipe,
   passRecipe,
   getLikedRecipes,
+  addRecipe,
 };

@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   position: relative;
-  width: ${({ block }) => (block ? '100%' : 'calc(100% - 68px)')};
+  width: ${({ block }) => (block ? '100%' : 'calc(100% - 136px)')};
 `;
 
 export const Toggler = styled.button.attrs(({ isOpen }) => ({

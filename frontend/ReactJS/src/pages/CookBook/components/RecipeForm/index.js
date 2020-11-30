@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { IoSend } from 'react-icons/io5';
+import { useHistory, useParams } from 'react-router-dom';
 
+import Loader from '../../../../assets/Loader';
 import { ImageInput } from '../../../../components/Inputs';
-import OriginFlag from '../../../../components/OriginFlag';
 // import Tags from '../../../../components/Tags';
 import RecipeFormContext from '../../../../contexts/recipeFormContext';
 import api from '../../../../services/api';
+import useFetch from '../../../../services/swr';
 import WarnError from '../../../../utils/Errors/warnError';
-import nationalities from '../../../../utils/nationalities';
+import nationalities, { getNationality } from '../../../../utils/nationalities';
 import Notificate from '../../../../utils/Notification';
 import toBase64 from '../../../../utils/toBase64';
 import CookingMethod from '../CookingMethod';
@@ -39,13 +41,44 @@ import {
 } from './styles';
 
 const RecipeForm = () => {
+  const { id: recipeID } = useParams();
+  const history = useHistory();
+
   const [basics, setBasics] = useState(initialBasics);
   const [image, setImage] = useState(initialImage);
   const [ingredients, setIngredients] = useState([]);
   const [cookingMethod, setCookingMethod] = useState([]);
-  // const [tags, setTags] = useState([]);
+  const [tags, setTags] = useState([]);
 
   const [edition, setEdition] = useState(initialEdition);
+
+  const isNew = recipeID === 'new';
+
+  const { data, mutate } = useFetch(!isNew ? `/recipes/${recipeID}` : '');
+
+  useEffect(() => {
+    if (data) {
+      setBasics((prev) => ({
+        ...prev,
+        name: data.name,
+        serves: {
+          value: Number(data.serves.split(' ')[0]),
+          unit: data.serves.split(' ')[1],
+        },
+        prepTime: {
+          value: Number(data.prep_time.split(' ')[0]),
+          unit: data.prep_time.split(' ')[1],
+        },
+        cuisine: getNationality(data.cuisine[0])?.nationality,
+      }));
+
+      setImage((prev) => ({ ...prev, url: data.image }));
+
+      setCookingMethod(data.cooking_method);
+      setIngredients(data.ingredients);
+      setTags(data.tags);
+    }
+  }, [data]);
 
   const handleDualInput = ({ master, name, value }) => {
     if (Number(value) < 0) return;
@@ -132,7 +165,7 @@ const RecipeForm = () => {
           'Uuuuh, a mysterious meal. What about inserting image about it?',
         );
 
-      const imageURL = await toBase64(image.file);
+      const imageURL = image.file ? await toBase64(image.file) : undefined;
 
       const body = {
         name: basics.name,
@@ -142,18 +175,28 @@ const RecipeForm = () => {
         cooking_method: cookingMethod,
         prep_time: `${basics.prepTime.value} ${basics.prepTime.unit}`,
         serves: `${basics.serves.value} ${basics.serves.unit}`,
-        tags: [],
+        tags,
       };
 
-      await api.post('/recipes', body);
+      let response = {};
+
+      if (isNew) response = await api.post('/recipes', body);
+      else response = await api.put(`/recipes/${recipeID}`, body);
+
+      mutate((prev) => ({ ...prev, ...response.data }));
+
+      Notificate(`Nice! Go check your recipe.`, 'error');
+      history.push(`/cookbook/${response.data._id}`);
     } catch (err) {
-      if (err instanceof WarnError) Notificate(err.message, 'warn');
+      if (err instanceof WarnError) Notificate(err.message, 'success');
       else {
         const error = err.response.data.message;
         Notificate(`An error occurred during login: ${error}`, 'error');
       }
     }
   };
+
+  const isLoading = !isNew && !data;
 
   return (
     <RecipeFormContext.Provider
@@ -164,69 +207,77 @@ const RecipeForm = () => {
       }}
     >
       <Container onSubmit={handleSubmit}>
-        <LeftSideContainer>
-          <CookingMethod method={cookingMethod} ingredients={ingredients} />
-          <MessageWriter
-            isEdition={edition.active}
-            value={edition.message}
-            onEdit={handleEdition}
-            onSend={handleSend}
-          />
-        </LeftSideContainer>
-        <RecipeBasics>
-          <ImageContainer>
-            <Image src={image.url} />
-            <ImageInput url={image.url} onFileUpload={handleImage} />
-          </ImageContainer>
-          <Header>
-            <div>
-              <Title
-                placeholder="Name"
-                name="name"
-                value={basics.name}
-                onChange={handleBasics}
+        {!isLoading ? (
+          <>
+            <LeftSideContainer>
+              <CookingMethod method={cookingMethod} ingredients={ingredients} />
+              <MessageWriter
+                isEdition={edition.active}
+                value={edition.message}
+                onEdit={handleEdition}
+                onSend={handleSend}
               />
-              <SmallInput
-                name="cuisine"
-                value={basics.cuisine}
-                onChange={handleBasics}
-                list="nationalities"
-              />
-              <datalist id="nationalities">
-                {Object.values(nationalities).map((cuisine) => (
-                  <option key={cuisine.code} value={cuisine.nationality}>
-                    {cuisine.code}
-                  </option>
-                ))}
-              </datalist>
-            </div>
-            <div>
-              <DualInput
-                master="prepTime"
-                name1="value"
-                name2="unit"
-                value1={basics.prepTime.value}
-                value2={basics.prepTime.unit}
-                onChange={handleDualInput}
-                options={PREPTIME_UNITS}
-              />
-              <DualInput
-                master="serves"
-                name1="value"
-                name2="unit"
-                value1={basics.serves.value}
-                value2={basics.serves.unit}
-                onChange={handleDualInput}
-                options={SERVES_UNITS}
-              />
-            </div>
-          </Header>
-          <hr />
-          {/* <Tags tags={tags} /> */}
-          <div className="centralized">
-            <SubmitButton type="submit">Create Recipe</SubmitButton>
-          </div>
-        </RecipeBasics>
+            </LeftSideContainer>
+            <RecipeBasics>
+              <ImageContainer>
+                <Image src={image.url} />
+                <ImageInput url={image.url} onFileUpload={handleImage} />
+              </ImageContainer>
+              <Header>
+                <div>
+                  <Title
+                    placeholder="Name"
+                    name="name"
+                    value={basics.name}
+                    onChange={handleBasics}
+                  />
+                  <SmallInput
+                    name="cuisine"
+                    value={basics.cuisine}
+                    onChange={handleBasics}
+                    list="nationalities"
+                  />
+                  <datalist id="nationalities">
+                    {Object.values(nationalities).map((cuisine) => (
+                      <option key={cuisine.code} value={cuisine.nationality}>
+                        {cuisine.code}
+                      </option>
+                    ))}
+                  </datalist>
+                </div>
+                <div>
+                  <DualInput
+                    master="prepTime"
+                    name1="value"
+                    name2="unit"
+                    value1={basics.prepTime.value}
+                    value2={basics.prepTime.unit}
+                    onChange={handleDualInput}
+                    options={PREPTIME_UNITS}
+                  />
+                  <DualInput
+                    master="serves"
+                    name1="value"
+                    name2="unit"
+                    value1={basics.serves.value}
+                    value2={basics.serves.unit}
+                    onChange={handleDualInput}
+                    options={SERVES_UNITS}
+                  />
+                </div>
+              </Header>
+              <hr />
+              {/* <Tags tags={tags} /> */}
+              <div className="centralized">
+                <SubmitButton type="submit">{`${
+                  isNew ? 'Create' : 'Update'
+                } Recipe`}</SubmitButton>
+              </div>
+            </RecipeBasics>
+          </>
+        ) : (
+          <Loader />
+        )}
       </Container>
     </RecipeFormContext.Provider>
   );

@@ -1,8 +1,9 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
+import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 import { GrAddCircle } from 'react-icons/gr';
 import { useHistory } from 'react-router-dom';
 
-import UserContext from '../../../../contexts/userContext';
+import { DotLink, DotButton } from '../../../../components/DotStuff';
 import { getNationality } from '../../../../utils/nationalities';
 import Filter from '../Filters';
 
@@ -14,12 +15,16 @@ import {
   Preview,
   Title,
   Cuisine,
-  NewRecipeContainer,
 } from './styles';
 
-const RecipesSidebar = ({ recipes, selectedRecipe }) => {
-  const { canCreate } = useContext(UserContext);
-
+const RecipesSidebar = ({
+  canCreate,
+  recipes,
+  seeAll,
+  creations,
+  selectedRecipe,
+  onSeeAll,
+}) => {
   const [nameFilter, setNameFilter] = useState('');
   const [originFilter, setOriginFilter] = useState('');
 
@@ -48,7 +53,23 @@ const RecipesSidebar = ({ recipes, selectedRecipe }) => {
   return (
     <Sidebar>
       <header>
-        {canCreate && <NewRecipe isActive={selectedRecipe === 'new'} />}
+        {canCreate && (
+          <DotLink
+            isActive={selectedRecipe === 'new'}
+            href="/cookbook/new"
+            title="Create new recipe"
+            togglelable
+            icon={<GrAddCircle />}
+          />
+        )}
+        {canCreate && (
+          <DotButton
+            isActive={seeAll}
+            title="See my creations"
+            onClick={onSeeAll}
+            icon={seeAll ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
+          />
+        )}
         <Filter
           block={!canCreate}
           name={nameFilter}
@@ -56,7 +77,26 @@ const RecipesSidebar = ({ recipes, selectedRecipe }) => {
           onChange={handleFilters}
         />
       </header>
-      <Container>
+      {seeAll && (
+        <Container fullSize={!seeAll}>
+          <RecipesContainer>
+            {creations.map((recipe) =>
+              getIsInFilter(recipe.name, recipe.cuisine[0]) ? (
+                <Recipe
+                  key={recipe._id}
+                  id={recipe._id}
+                  name={recipe.name}
+                  image={recipe.image}
+                  origin={recipe.cuisine[0]}
+                  isActive={selectedRecipe === recipe._id}
+                />
+              ) : null,
+            )}
+          </RecipesContainer>
+        </Container>
+      )}
+
+      <Container fullSize={!seeAll}>
         <RecipesContainer>
           {recipes.map((recipe) =>
             getIsInFilter(recipe.name, recipe.cuisine[0]) ? (
@@ -97,24 +137,5 @@ const Recipe = ({
     <Cuisine origin={origin} />
   </RecipeContainer>
 );
-
-const NewRecipe = ({ isActive }) => {
-  const history = useHistory();
-
-  const handleClick = () => {
-    if (isActive) history.goBack();
-  };
-
-  return (
-    <NewRecipeContainer
-      to="/cookbook/new"
-      isActive={isActive}
-      title="Create new recipe"
-      onClick={handleClick}
-    >
-      <GrAddCircle />
-    </NewRecipeContainer>
-  );
-};
 
 export default RecipesSidebar;

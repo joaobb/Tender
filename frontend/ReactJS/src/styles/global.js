@@ -62,6 +62,26 @@ export default createGlobalStyle`
         align-items: center;
     }
 
+    .mt-auto {
+        margin-top: auto;
+    }
+
+    .mr-auto {
+        margin-right: auto;
+    }
+
+    .mb-auto {
+        margin-bottom: auto;
+    }
+
+    .ml-auto {
+        margin-left: auto;
+    }
+    
+    .m-auto {
+        margin: auto;
+    }
+
     .sscroll::-webkit-scrollbar {
         width: 5px;
     }

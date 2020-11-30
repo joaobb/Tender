@@ -28,8 +28,8 @@ const TARGET = {
   DIRECTIONS: 1,
 };
 
-const SERVES_UNITS = ['Servings', 'Cups'];
-const PREPTIME_UNITS = ['Days', 'Hours', 'Minutes'];
+const SERVES_UNITS = ['servings', 'cups', 'bars'];
+const PREPTIME_UNITS = ['days', 'hours', 'minutes'];
 
 export {
   initialBasics,

@@ -3,8 +3,7 @@ import styled from 'styled-components';
 
 export const Sidebar = styled.div`
   height: 70%;
-  min-width: 300px;
-  max-width: 380px;
+  width: 380px;
 
   & > header {
     display: flex;
@@ -13,13 +12,17 @@ export const Sidebar = styled.div`
 `;
 
 export const Container = styled.div.attrs({ className: 'shadowed' })`
-  height: calc(100% - 68px);
+  height: calc(${({ fullSize }) => (fullSize ? '100% - 68px' : '50% - 40px')});
 
   display: flex;
   flex-direction: column;
 
   border-radius: 30px;
   background: white;
+
+  &:last-child {
+    margin-top: ${({ fullSize }) => (fullSize ? '' : '12px')};
+  }
 `;
 
 export const RecipesContainer = styled.div.attrs({ className: 'sscroll' })`
@@ -67,27 +70,4 @@ export const Title = styled.span`
 
 export const Cuisine = styled.small`
   text-transform: capitalize;
-`;
-
-export const NewRecipeContainer = styled(Link)`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  text-decoration: none;
-
-  color: black;
-
-  height: 48px;
-  width: 48px;
-
-  border-radius: 50%;
-  /* margin-bottom: 20px; */
-
-  font-size: 1.4rem;
-
-  background-color: white;
-
-  box-shadow: ${({ isActive }) => (isActive ? 'inset' : '')} 0 4px 8px 4px
-    rgba(0, 0, 0, 0.1);
 `;

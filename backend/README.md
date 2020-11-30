@@ -43,6 +43,10 @@ MONGO_USERNAME=github-user
 MONGO_PASSWORD=u6UssVSg8kVkytK9
 
 TOKEN_SECRET=7nLyShDwZN
+
+CLOUDINARY_NAME=dqz9lty8v
+CLOUDINARY_API_KEY=977283554737519
+CLOUDINARY_API_SECRET=pfOdtOBS6BKXDOJyVO-MKbTLfKg
 ```
 
 #### PSA: Don't insert any real passwords on this version, since everyone that has the db access and the token secret can see those.

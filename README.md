@@ -19,12 +19,29 @@ Once you and your meal have “matched”, its recipe will be visible on your me
 - Recipe details: an area where all the recipe information is presented to the user.
 
 
-
 ### Deploys: 
 
-Frontend: https://tender.joaobb.xyz/
+- Frontend: https://tender.joaobb.xyz/
 
-Backend: https://tender-api.joaobb.xyz/api/v1
+- Backend: https://tender-api.joaobb.xyz/api/v1
+
+### Test Credentials: 
+
+As a security measure, user roles were created for the system as described down below.
+
+| Permission - Role |        Root        |       Creator      | User |
+|:-----------------:|:------------------:|:------------------:|:----:|
+|   Create recipe   | :heavy_check_mark: | :heavy_check_mark: |  :x: |
+|  Edit own recipes | :heavy_check_mark: | :heavy_check_mark: |  :x: |
+|  Edit all recipes | :heavy_check_mark: |         :x:        |  :x: |
+|  Change user role | :heavy_check_mark: |         :x:        |  :x: |
+
+Every new user is by default a "USER", and it has no recipe creation or edition permissions. 
+To be able to create and edit recipes, use this test credentials:  
+
+|   Email  | creator@tender.com |
+|:--------:|:------------------:|
+| Password |     tender@123     |
 
 ---
 

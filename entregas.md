@@ -21,7 +21,14 @@
 #### Um subcomponente com...
 - Estado sendo definido por um GET: [entrega](https://github.com/joaobb/Tender/blob/master/frontend/ReactJS/src/view/Recipes/RecipeForm.js#L42)
 
-
 ### Entrega #6:
+#### Um componente com...
+- Estado sendo definido por um GET: [entrega](https://github.com/joaobb/Tender/blob/master/frontend/ReactJS/src/pages/CookBook/index.js)
+
+### Entrega #7:
 #### Testar um componente que tenha...
 - Props e alteração de estado: [entrega](https://github.com/joaobb/Tender/blob/master/frontend/ReactJS/src/App.test.js)
+
+### Entrega #8:
+#### Uso de um contexto para....
+- Propagação de estado para baixo e para cima: [Para baixo](https://github.com/joaobb/Tender/blob/master/frontend/ReactJS/src/routes/index.js#L26) e [Para cima](https://github.com/joaobb/Tender/blob/master/frontend/ReactJS/src/pages/Auth/SignIn.js#L54)

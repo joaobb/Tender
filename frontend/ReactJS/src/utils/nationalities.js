@@ -1493,6 +1493,12 @@ const nationlities = {
     country: 'Zimbabwe',
     nationality: 'Zimbabwean',
   },
+  'HWI;Hawaiian;': {
+    code: 'HWI',
+    smallCode: 'HI',
+    country: 'Hawaii',
+    nationality: 'Hawaiian',
+  },
 };
 
 const getNationality = (part = '') => {

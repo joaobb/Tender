@@ -132,10 +132,7 @@ const RecipeForm = () => {
           'Uuuuh, a mysterious meal. What about inserting image about it?',
         );
 
-      const imageURL = (await toBase64(image.file)).replace(
-        new RegExp('^data:image/(jpeg|jpg|png);base64,'),
-        '',
-      );
+      const imageURL = await toBase64(image.file);
 
       const body = {
         name: basics.name,

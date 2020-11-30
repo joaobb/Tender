@@ -4,6 +4,7 @@ import styled from 'styled-components';
 export const Sidebar = styled.div`
   height: 70%;
   min-width: 300px;
+  max-width: 380px;
 
   & > header {
     display: flex;
@@ -24,6 +25,7 @@ export const Container = styled.div.attrs({ className: 'shadowed' })`
 export const RecipesContainer = styled.div.attrs({ className: 'sscroll' })`
   overflow-y: auto;
   border-radius: 30px;
+  height: -webkit-fill-available;
 `;
 
 export const RecipeContainer = styled(Link).attrs(({ isActive }) => ({

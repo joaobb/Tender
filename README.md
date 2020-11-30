@@ -25,7 +25,7 @@ Once you and your meal have “matched”, its recipe will be visible on your me
 
 - Backend: https://tender-api.joaobb.xyz/api/v1
 
-### Test Credentials: 
+### Security: 
 
 As a security measure, user roles were created for the system as described down below.
 

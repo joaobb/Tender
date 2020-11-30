@@ -37,6 +37,7 @@ As a security measure, user roles were created for the system as described down 
 |  Change user role | :heavy_check_mark: |         :x:        |  :x: |
 
 Every new user is by default a "USER", and it has no recipe creation or edition permissions. 
+
 To be able to create and edit recipes, use this test credentials:  
 
 |   Email  | creator@tender.com |

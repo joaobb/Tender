@@ -61,9 +61,10 @@ const updateRecipe = async (recipeID, body, role, accountID) => {
       );
 
     const query = {
-      _id: recipeID,
-      accountID: role === roles.CREATOR ? accountID : undefined,
-    };
+			_id: mongoose.Types.ObjectId(recipeID),
+		};
+
+		if (role === roles.CREATOR) query.author_id = mongoose.Types.ObjectId(accountID);
 
     const recipe = await Recipe.findOneAndUpdate(query, { ...body });
 

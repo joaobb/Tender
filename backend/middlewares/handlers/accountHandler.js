@@ -77,6 +77,20 @@ const handleGetLiked = async (req, res, next) => {
   }
 };
 
+const handleGetCreations = async (req, res, next) => {
+  try {
+    const userToken = req.header("Authorization");
+
+    const response = await AccountService.getCreations(userToken);
+
+    res.locals["creations"] = response;
+
+    next();
+  } catch (error) {
+    ErrorHandler.handleError(req, res, error);
+  }
+};
+
 const handleRoleChange = async (req, res, next) => {
   try {
     const { accountID, role } = req.body;
@@ -114,4 +128,5 @@ module.exports = {
   handleGetAccount,
   handleRoleChange,
   handleGetLiked,
+  handleGetCreations,
 };

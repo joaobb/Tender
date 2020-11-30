@@ -57,9 +57,24 @@ const getLikedRecipes = async ({ res }) => {
   }
 };
 
+const getCreations = async ({ res }) => {
+  try {
+    const { creations } = res.locals;
+
+    res.json({
+      recipes: { creations },
+      count: creations.length,
+    });
+  } catch (error) {
+    console.error(error);
+    res.json({ message: error.message });
+  }
+};
+
 module.exports = {
   createAccount,
   getAccount,
   getLikedRecipes,
+  getCreations,
   roleChange,
 };

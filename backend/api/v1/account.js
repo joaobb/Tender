@@ -22,6 +22,13 @@ router.get(
   Controller.getLikedRecipes,
 );
 
+router.get(
+  "/creations",
+  AuthHandler.handleAuthorization(roles.CREATOR),
+  Handler.handleGetCreations,
+  Controller.getCreations,
+);
+
 router.post("/", Handler.handleCreateAccount, Controller.createAccount);
 
 router.post(

@@ -153,12 +153,29 @@ const addRecipe = async (accountID, recipeID) => {
   }
 };
 
+const getCreations = async (userToken) => {
+  try {
+    const accountID = await getAccountID(userToken);
+
+    const account = await Account.findById(accountID);
+
+    const likedRecipes = await RecipeService.getRecipesFromArray(
+      account.createdRecipes,
+    );
+
+    return likedRecipes;
+  } catch (error) {
+    throw error;
+  }
+};
+
 module.exports = {
   getAccountID,
   createAccount,
   changeRole,
   getAccount,
   getUserRecipes,
+  getCreations,
   likeRecipe,
   passRecipe,
   getLikedRecipes,

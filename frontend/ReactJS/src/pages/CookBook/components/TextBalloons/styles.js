@@ -36,7 +36,7 @@ export const MessageContainer = styled.li`
   width: fit-content;
 
   &:not(:first-child) {
-    max-width: calc(64% - ${({ size }) => Math.round(size * 0.05)}ch);
+    max-width: calc(64%);
   }
 
   border-radius: 8px 20px 20px 20px;

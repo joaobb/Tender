@@ -50,8 +50,8 @@ const Recipe = () => {
                 )}
               </div>
               <div>
-                <Small>{data.prep_time} Min</Small>
-                <Small>{data.serves} Serves</Small>
+                <Small>{data.prep_time}</Small>
+                <Small>{data.serves}</Small>
               </div>
             </Header>
             <hr />

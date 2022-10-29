@@ -27,7 +27,7 @@ Once you and your meal have “matched”, its recipe will be visible on your me
 
 ### Security: 
 
-As a security measure, user roles were created for the system as described down below.
+As a security measure, user roles were created for the system as described down below:
 
 | Permission - Role |        Root        |       Creator      | User |
 |:-----------------:|:------------------:|:------------------:|:----:|
